@@ -1,0 +1,33 @@
+.questionPageContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.question {
+    margin-bottom: 80px;
+    /* margin-top: 40px; */
+    font-size: large;
+    color: #020300;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    background-color: blueviolet;
+}
+
+@media (max-width: 768px) {
+    .questionPageContainer {
+        background-color: white;
+    }
+    .exitImage {
+        height: 70px;
+        width: 70px;
+        align-self: flex-end;
+        margin: 5px;
+    }
+    .question {
+        font-size: 30px;
+    }
+}
