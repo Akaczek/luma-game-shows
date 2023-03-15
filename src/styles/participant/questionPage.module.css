@@ -2,32 +2,73 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background: var(--linear-gradient-background);
 }
 
 .question {
     margin-bottom: 80px;
-    /* margin-top: 40px; */
-    font-size: large;
     color: #020300;
-    height: 20%;
+    height: 25%;
     display: flex;
     align-items: center;
     text-align: center;
-    width: 100%;
-    background-color: blueviolet;
+    overflow: auto;
+    padding: 2px;
+    justify-content: center;
+    width: 90%;
 }
 
+.questionText {
+    height: 100%;
+    display: flex;
+    /* align-items: center; */
+    text-align: center;
+    align-self: center;
+}
+
+.exitImageLink {
+    position: absolute;
+    right: 20px;
+}
+
+/* mobilne */
+
 @media (max-width: 768px) {
-    .questionPageContainer {
-        background-color: white;
+    .exitImage {
+        height: 100%;
+        width: 100%;
+        margin: 10px;
     }
+    .question {
+        font-size: 24px;
+        margin-top: 80px;
+        margin-bottom: 20px;
+    }
+    .questionPageContainer {
+        justify-content: center;
+    }
+    .exitImageLink {
+        right: 25px;
+        top: 10px;
+        height: 60px;
+        width: 60px;
+    }
+}
+
+/* duzy ekran */
+
+@media (min-width: 768px) {
     .exitImage {
         height: 70px;
         width: 70px;
-        align-self: flex-end;
-        margin: 5px;
+        margin: 20px;
     }
     .question {
-        font-size: 30px;
+        font-size: 40px;
+        margin-bottom: 0;
+        height: 25%;
+        margin-top: 80px;
     }
 }
