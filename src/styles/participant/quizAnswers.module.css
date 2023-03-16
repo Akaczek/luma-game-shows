@@ -1,0 +1,70 @@
+.answersContainer {
+    width: 90%;
+    background-color: rgba(239, 233, 244, 0.5);
+    height: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+.answerButton {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.answerButtonHidden {
+    display: hidden;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.answerButtonSmall {
+    height: 50%;
+}
+
+.answerButtonBig {
+    height: 100%;
+}
+
+.buttonView {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    height: 80%;
+    width: 80%;
+    border-radius: 10px;
+    font-size: 100px;
+}
+
+.buttonViewHidden {
+    display: hidden;
+}
+
+.class0 {
+    background-color: var(--answer-A-color);
+}
+.class1 {
+    background-color: var(--answer-B-color);
+}
+.class2 {
+    background-color: var(--answer-C-color);
+}
+.class3 {
+    background-color: var(--answer-D-color);
+}
+
+@media (min-width: 768px) {
+    .answersContainer {
+        max-width: 830px;
+    }
+}
