@@ -4,7 +4,7 @@
         rgb(121, 211, 89)
     );
     --answer-A-color: rgb(121, 211, 89);
-    --answer-B-color: rgba(39, 159, 205);
+    --answer-B-color: rgb(39, 159, 205);
     --answer-C-color: rgb(234, 113, 74);
     --answer-D-color: rgb(250, 255, 129);
 }

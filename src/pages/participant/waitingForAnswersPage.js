@@ -1,11 +1,11 @@
 import styles from "../../styles/participant/waitingForAnswers.module.css";
 import { ClockLoader } from "react-spinners";
 
-const waitingForAnswers = () => {
+const waitingForAnswersPage = () => {
     const allParticipants = 5;
     const answerCount = 3;
     return (
-        <div className={styles.waitingForAnswersPageContainer}>
+        <div className="gradient-animation-1">
             <div className={styles.waitingLabel}>
                 Oczekiwanie na pozostałych uczestników...
             </div>
@@ -22,4 +22,4 @@ const waitingForAnswers = () => {
     );
 };
 
-export default waitingForAnswers;
+export default waitingForAnswersPage;
