@@ -3,7 +3,7 @@ import QuizAnswers from "@/components/participant/quizAnswers";
 import { createAnswerLetters, calculateAnswerHeight } from "@/utils/answers";
 import Image from "next/image";
 import Link from "next/link";
-import exitImageFile from "../../../public/exit.png";
+import exitImageFile from "../../../public/exit.svg";
 import OpenAnswer from "@/components/participant/openAnswer";
 
 const QuestionPage = () => {
@@ -25,7 +25,11 @@ const QuestionPage = () => {
                         Jaki jest najwyższy szczyt na świecie? Jaki jest
                         najwyższy szczyt na świecie? Jaki jest najwyższy szczyt
                         na świecie? Jaki jest najwyższy szczyt na świecie? Jaki
-                        jest najwyższy szczyt na świecie?
+                        jest najwyższy szczyt na świecie?Jaki jest najwyższy
+                        szczyt na świecie? Jaki jest najwyższy szczyt na
+                        świecie? Jaki jest najwyższy szczyt na świecie? Jaki
+                        jest najwyższy szczyt na świecie? Jaki jest najwyższy
+                        szczyt na świecie?
                     </div>
                 </div>
                 {/* <QuizAnswers
