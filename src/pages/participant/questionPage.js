@@ -20,13 +20,6 @@ const QuestionPage = () => {
                 />
             </Link>
             <div className={styles.questionPageContainer}>
-                {/* <Link href="/" className={styles.exitImageLink}>
-                <Image
-                    src={exitImageFile}
-                    alt="exit"
-                    className={styles.exitImage}
-                />
-            </Link> */}
                 <div className={styles.question}>
                     <div className={styles.questionText}>
                         Jaki jest najwyższy szczyt na świecie? Jaki jest
@@ -35,11 +28,11 @@ const QuestionPage = () => {
                         jest najwyższy szczyt na świecie?
                     </div>
                 </div>
-                <QuizAnswers
+                {/* <QuizAnswers
                     answerLetters={answers}
                     isAnswerBig={isAnswerBig}
-                />
-                {/* <OpenAnswer /> */}
+                /> */}
+                <OpenAnswer />
             </div>
         </>
     );

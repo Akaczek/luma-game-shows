@@ -65,8 +65,6 @@
 
 @media (min-width: 768px) {
     .answersContainer {
-        /* max-height: 60%; */
         max-width: 830px;
-        /* margin-bottom: 20px; */
     }
 }

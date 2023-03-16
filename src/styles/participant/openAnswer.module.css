@@ -44,8 +44,6 @@
     outline: none;
 }
 
-/* duzy ekran */
-
 @media (min-width: 768px) {
     .openAnswerButton {
         width: 20%;

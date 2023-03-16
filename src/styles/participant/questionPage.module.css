@@ -23,7 +23,6 @@
 .questionText {
     height: 100%;
     display: flex;
-    /* align-items: center; */
     text-align: center;
     align-self: center;
 }
@@ -32,8 +31,6 @@
     position: absolute;
     right: 20px;
 }
-
-/* mobilne */
 
 @media (max-width: 768px) {
     .exitImage {
@@ -56,8 +53,6 @@
         width: 60px;
     }
 }
-
-/* duzy ekran */
 
 @media (min-width: 768px) {
     .exitImage {
