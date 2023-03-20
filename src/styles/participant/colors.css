@@ -3,6 +3,14 @@
         rgb(39, 159, 205),
         rgb(121, 211, 89)
     );
+    --linear-gradient-background-correct: linear-gradient(
+        rgb(121, 211, 89),
+        rgb(57, 214, 0)
+    );
+    --linear-gradient-background-wrong: linear-gradient(
+        rgb(234, 113, 74),
+        rgb(255, 0, 0)
+    );
     --answer-A-color: rgb(121, 211, 89);
     --answer-B-color: rgb(39, 159, 205);
     --answer-C-color: rgb(234, 113, 74);
