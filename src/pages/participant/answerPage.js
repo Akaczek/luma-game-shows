@@ -1,4 +1,4 @@
-import styles from "../../styles/participant/answerPage.module.css";
+import styles from '../../styles/participant/answerPage.module.css';
 
 const QuestionPage = () => {
     const isCorrect = true;

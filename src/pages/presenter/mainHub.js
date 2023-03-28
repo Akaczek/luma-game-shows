@@ -1,18 +1,16 @@
-import { databaseURL } from "@/network/urls";
-import { getUser } from "@/network/getData";
 
-export async function getServerSideProps() {
-  const data = await getUser();
+import { useSingleUser, useUserQuizes } from "@/network/getData";
 
-  return { props: { data } };
-}
+const MainHub = () => {
 
-const MainHub = ({ data }) => {
-  console.log(data);
+  const user = useSingleUser('Ukasz');
+  const userQuizes = useUserQuizes(user.id);
+
+  console.log(userQuizes);
 
   return (
     <>
-      <p>Elo {data.items[0].username}</p>
+      <p>Elo</p>
     </>
   );
 };
