@@ -1,0 +1,42 @@
+import sharedStyles from '../../styles/presenter/sharedPresenterStyles.module.css';
+import styles from '../../styles/presenter/loginPage.module.css';
+import Image from 'next/image';
+import Link from 'next/link';
+import logo from '../../../public/luma_logo.png';
+import { useState } from 'react';
+const Login = () => {
+  const submitJoining = () => {};
+  const [gameCode, setGameCode] = useState('');
+  const [userNick, setUserNick] = useState('');
+  return (
+    <div className={sharedStyles.pageContainer}>
+      <Image src={logo} alt="exit" className={styles.logo} />
+      <div className={styles.formBackground}>
+        <form className={styles.joinForm} onSubmit={submitJoining}>
+          <div className={styles.labelInfo}>Zaloguj się</div>
+          <label for="nick-input" className={styles.inpuLabel}>
+            LOGIN
+          </label>
+          <input
+            type="text"
+            id="nick-input"
+            name="nick-input"
+            className={styles.inputJoin}
+            value={userNick}
+            onChange={(e) => setUserNick(e.target.value)}
+          />
+          <input
+            type="submit"
+            className={styles.submitJoiningBtn}
+            value="ZALOGUJ"
+          />
+          <Link href="/presenter/register" className={styles.registerInfo}>
+            Nie masz konta? Zarejestruj się.
+          </Link>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
