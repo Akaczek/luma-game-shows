@@ -1,8 +1,6 @@
-
-import { useSingleUser, useUserQuizes } from "@/network/getData";
+import { useSingleUser, useUserQuizes } from '@/network/getData';
 
 const MainHub = () => {
-
   const user = useSingleUser('Ukasz');
   const userQuizes = useUserQuizes(user.id);
 

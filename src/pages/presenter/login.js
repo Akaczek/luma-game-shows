@@ -1,20 +1,41 @@
-import sharedStyles from '../../styles/presenter/sharedPresenterStyles.module.css';
-import styles from '../../styles/presenter/loginPage.module.css';
+import { fetchSingleUser } from '@/network/getData';
+import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import logo from '../../../public/luma_logo.png';
-import { useState } from 'react';
+import styles from '../../styles/presenter/loginPage.module.css';
+import sharedStyles from '../../styles/presenter/sharedPresenterStyles.module.css';
+
 const Login = () => {
-  const submitJoining = () => {};
-  const [gameCode, setGameCode] = useState('');
   const [userNick, setUserNick] = useState('');
+  const [user, setUser] = useState({});
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchSingleUser(userNick)
+      .then((data) => {
+        setUser(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   return (
     <div className={sharedStyles.pageContainer}>
+      <Head>
+        <title>LUMA - game shows</title>
+      </Head>
       <Image src={logo} alt="exit" className={styles.logo} />
       <div className={styles.formBackground}>
-        <form className={styles.joinForm} onSubmit={submitJoining}>
+        <form className={styles.joinForm} onSubmit={handleSubmit}>
           <div className={styles.labelInfo}>Zaloguj się</div>
-          <label for="nick-input" className={styles.inpuLabel}>
+          <label htmlFor="nick-input" className={styles.inpuLabel}>
             LOGIN
           </label>
           <input

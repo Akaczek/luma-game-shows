@@ -1,45 +1,45 @@
 .waitingForAnswersPageContainer {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: var(--linear-gradient-background);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--linear-gradient-background);
 }
 .waitingLabel {
-    color: white;
-    font-size: 30px;
-    display: flex;
-    align-items: flex-end;
-    text-align: center;
-    justify-content: center;
+  color: white;
+  font-size: 30px;
+  display: flex;
+  align-items: flex-end;
+  text-align: center;
+  justify-content: center;
 }
 
 .loaderContainer {
-    margin-top: 100px;
-    margin-bottom: 100px;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 .answerState {
-    color: white;
-    font-size: 80px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    padding: 2px;
-    justify-content: center;
+  color: white;
+  font-size: 80px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 2px;
+  justify-content: center;
 }
 
 .answerLabel {
-    color: white;
-    font-size: 24px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    padding: 2px;
-    justify-content: center;
+  color: white;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 2px;
+  justify-content: center;
 }
 
 .loadingLabel {
-    margin-top: 100px;
+  margin-top: 100px;
 }
