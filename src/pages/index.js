@@ -24,18 +24,18 @@ export default function Home() {
           </Link>
           <Link
             href="/presenter/login"
-            className={[styles.linkBox, styles.hiddenOnSmallScreen].join('')}
+            className={`${styles.linkBox} ${styles.hiddenOnSmallScreen}`}
           >
             <span
               className={[styles.linkBoxTitle, styles.hiddenOnSmallScreen].join(
-                ''
+                ' '
               )}
             >
               Jesteś prezenterem?
             </span>
             <span
               className={[styles.linkBoxLink, styles.hiddenOnSmallScreen].join(
-                ''
+                ' '
               )}
             >
               Przejdź do logowania.

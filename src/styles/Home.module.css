@@ -47,8 +47,29 @@
   text-align: center;
   font-size: x-large;
 }
+
+@media (max-width: 1000px) {
+  .boxesContainer {
+    width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   .hiddenOnSmallScreen {
-    /* display: none; */
+    color: red;
+    display: none;
+  }
+
+  .linkBox {
+    width: 70%;
+  }
+}
+
+@media (max-width: 440px) {
+  .linkBoxTitle {
+    font-size: x-large;
+  }
+  .linkBoxLink {
+    font-size: x-large;
   }
 }
