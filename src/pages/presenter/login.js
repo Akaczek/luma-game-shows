@@ -10,7 +10,6 @@ import sharedStyles from '../../styles/presenter/sharedPresenterStyles.module.cs
 
 const Login = () => {
   const [userNick, setUserNick] = useState('');
-  const [user, setUser] = useState({});
   const router = useRouter();
 
   const handleSubmit = (e) => {
@@ -18,8 +17,7 @@ const Login = () => {
     fetchSingleUser(userNick)
       .then((data) => {
         if (data) {
-          setUser(data);
-          router.push(`/presenter/${userNick}`)
+          router.push(`/presenter/${userNick}/quizes`)
         } else {
           alert('Nie ma takiego użytkownika');
         }
@@ -28,10 +26,6 @@ const Login = () => {
         console.error(error);
       });
   };
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   return (
     <div className={sharedStyles.pageContainer}>

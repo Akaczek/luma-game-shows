@@ -1,6 +1,6 @@
 import { useSingleUser, useUserQuizes } from '@/network/getData';
 import { useRouter } from 'next/router';
-import sharedStyles from '../../styles/presenter/sharedPresenterStyles.module.css';
+import sharedStyles from '../../../styles/presenter/sharedPresenterStyles.module.css';
 import { isEmpty } from 'ramda';
 
 const UserPage = () => {
@@ -9,12 +9,9 @@ const UserPage = () => {
   const [userObject, setUserObject] = useSingleUser(user);
   const userQuizes = useUserQuizes(userObject.id);
 
-  console.log(userQuizes);
-
-  console.log(user);
-
   return (
     <div className={sharedStyles.pageContainer}>
+    <button onClick={() => router.push(`/presenter/${userObject.username}/createQuiz`)}>Stwórz quiz</button>
       <p>Elo</p>
       {!isEmpty(userQuizes) && (
         <>
