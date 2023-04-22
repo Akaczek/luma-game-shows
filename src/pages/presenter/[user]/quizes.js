@@ -11,7 +11,13 @@ const UserPage = () => {
 
   return (
     <div className={sharedStyles.pageContainer}>
-    <button onClick={() => router.push(`/presenter/${userObject.username}/createQuiz`)}>Stwórz quiz</button>
+      <button
+        onClick={() =>
+          router.push(`/presenter/${userObject.username}/createQuiz`)
+        }
+      >
+        Stwórz quiz
+      </button>
       <p>Elo</p>
       {!isEmpty(userQuizes) && (
         <>

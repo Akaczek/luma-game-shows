@@ -17,7 +17,7 @@ const Login = () => {
     fetchSingleUser(userNick)
       .then((data) => {
         if (data) {
-          router.push(`/presenter/${userNick}/quizes`)
+          router.push(`/presenter/${userNick}/quizes`);
         } else {
           alert('Nie ma takiego użytkownika');
         }
@@ -36,7 +36,7 @@ const Login = () => {
       <div className={styles.formBackground}>
         <form className={styles.joinForm} onSubmit={handleSubmit}>
           <div className={styles.labelInfo}>Zaloguj się</div>
-          <label htmlFor="nick-input" className={styles.inpuLabel}>
+          <label htmlFor="nick-input" className={styles.inputLabel}>
             LOGIN
           </label>
           <input

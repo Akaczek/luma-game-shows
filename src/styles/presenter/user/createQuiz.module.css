@@ -1,0 +1,93 @@
+.createQuizTitle {
+  color: black;
+  font-size: 40px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.inputForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.inputLabel {
+  color: white;
+  display: block;
+  font-size: 35px;
+  height: 16px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.inputCreate {
+  background: rgb(202, 202, 202);
+  padding: 10px;
+  border: 0;
+  color: #000000;
+  font-size: 35px;
+  height: 30px;
+  line-height: 30px;
+  outline: none !important;
+  width: 98%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.submitCreateBtn {
+  align-self: center;
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  background-color: var(--grey-background);
+  border-radius: 50px;
+  padding: 8px 16px;
+  color: black;
+  line-height: 26px;
+  min-width: 110px;
+  margin-top: 30px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.logo {
+  width: 70%;
+  max-width: 200px;
+  height: auto;
+  margin-top: 10px;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.changeQuestionContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.changeQuestionDropdown {
+  font-size: 30px;
+  border-radius: 50px !important;
+}
+
+.addQuestionFormContainer {
+  width: 80%;
+  background-color: var(--grey-background);
+  border-radius: 10px;
+  margin-top: 30px;
+  height: 70%;
+  overflow: auto;
+}
