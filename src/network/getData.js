@@ -44,11 +44,11 @@ export const useUserQuizes = (userId) => {
     axios
       .get(`${databaseURL}collections/quiz/records?filter=(user="${userId}")`)
       .then((response) => {
-        setQuizes(response.data);
+        setQuizes(response.data.items);
       });
   }, [userId]);
 
-  return quizes;
+  return [quizes, setQuizes];
 };
 
 export const useQuizQuestions = (quizId) => {

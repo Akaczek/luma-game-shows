@@ -1,0 +1,44 @@
+.quizesTable {
+  width: 100%;
+  /* height: 100%; */
+  border-collapse: collapse;
+  /* display: block; */
+}
+
+.quizesTable th {
+  padding: 8px;
+  text-align: left;
+}
+
+.quizesTable td {
+  padding: 16px;
+}
+
+.quizesTable tr:hover {
+  background-color: #ddd;
+}
+
+.runButton {
+  align-self: center;
+  width: 50%;
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  background-color: var(--answer-B-color);
+  border-radius: 50px;
+  padding: 4px 16px;
+  color: white;
+  line-height: 26px;
+  min-width: 110px;
+  max-width: 150px;
+}
+
+.tdButton {
+  width: 20%;
+}
+
+.trHeader {
+  font-weight: 500;
+  font-size: large;
+}

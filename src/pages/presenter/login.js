@@ -17,7 +17,7 @@ const Login = () => {
     fetchSingleUser(userNick)
       .then((data) => {
         if (data) {
-          router.push(`/presenter/${userNick}/quizes`)
+          router.push(`/presenter/${userNick}/quizes`);
         } else {
           alert('Nie ma takiego użytkownika');
         }
