@@ -4,10 +4,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import logo from '../../../public/luma_logo.png';
 import { useState } from 'react';
+
 const Register = () => {
   const submitJoining = () => {};
   const [gameCode, setGameCode] = useState('');
   const [userNick, setUserNick] = useState('');
+
   return (
     <div className={sharedStyles.pageContainer}>
       <Image src={logo} alt="exit" className={styles.logo} />

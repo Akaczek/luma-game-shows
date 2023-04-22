@@ -2,6 +2,7 @@ import { fetchSingleUser } from '@/network/getData';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import logo from '../../../public/luma_logo.png';
 import styles from '../../styles/presenter/loginPage.module.css';
@@ -10,12 +11,18 @@ import sharedStyles from '../../styles/presenter/sharedPresenterStyles.module.cs
 const Login = () => {
   const [userNick, setUserNick] = useState('');
   const [user, setUser] = useState({});
+  const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchSingleUser(userNick)
       .then((data) => {
-        setUser(data);
+        if (data) {
+          setUser(data);
+          router.push(`/presenter/${userNick}`)
+        } else {
+          alert('Nie ma takiego użytkownika');
+        }
       })
       .catch((error) => {
         console.error(error);

@@ -26,7 +26,7 @@ export const useSingleUser = (username) => {
           setUser(response.data.items[0]);
         });
     }
-  }, [username, user]);
+  }, [username]);
 
   return [user, setUser];
 };
@@ -39,7 +39,7 @@ export const fetchSingleUser = async (username) => {
 };
 
 export const useUserQuizes = (userId) => {
-  const [quizes, setQuizes] = useState([]);
+  const [quizes, setQuizes] = useState({});
   useEffect(() => {
     axios
       .get(`${databaseURL}collections/quiz/records?filter=(user="${userId}")`)
