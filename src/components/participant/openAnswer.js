@@ -11,7 +11,7 @@ const OpenAnswer = () => {
 
   return (
     <form className={styles.openAnswerContainer} onSubmit={handleSubmit}>
-      <label className={styles.openAnswerLabel} for="openAnswerTextArea">
+      <label className={styles.openAnswerLabel} htmlFor="openAnswerTextArea">
         Wpisz odpowiedź:
       </label>
       <textarea

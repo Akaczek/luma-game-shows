@@ -16,7 +16,7 @@ const Register = () => {
       <div className={styles.formBackground}>
         <form className={styles.joinForm} onSubmit={submitJoining}>
           <div className={styles.labelInfo}>Stwórz konto</div>
-          <label for="nick-input" className={styles.inpuLabel}>
+          <label htmlFor="nick-input" className={styles.inpuLabel}>
             LOGIN
           </label>
           <input

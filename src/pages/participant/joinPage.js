@@ -11,7 +11,7 @@ const JoinPage = () => {
       <Image src={logo} alt="exit" className={styles.logo} />
       <div className={styles.formBackground}>
         <form className={styles.joinForm} onSubmit={submitJoining}>
-          <label for="game-code-input" className={styles.inpuLabel}>
+          <label htmlFor="game-code-input" className={styles.inpuLabel}>
             KOD GRY
           </label>
           <input
@@ -22,7 +22,7 @@ const JoinPage = () => {
             value={gameCode}
             onChange={(e) => setGameCode(e.target.value)}
           />
-          <label for="nick-input" className={styles.inpuLabel}>
+          <label htmlFor="nick-input" className={styles.inpuLabel}>
             NICK
           </label>
           <input
