@@ -11,6 +11,7 @@ import logo from '../../../../public/luma_logo.png';
 import sharedStyles from '../../../styles/presenter/sharedPresenterStyles.module.css';
 import styles from '../../../styles/presenter/user/createQuiz.module.css';
 import { questionsTypes } from '../../../utils/constants';
+import { addQuestionToQuiz } from '@/network/postData';
 
 const UserPage = () => {
   const router = useRouter();
@@ -21,16 +22,6 @@ const UserPage = () => {
   const [quizName, setQuizName] = useState('');
   const [questionType, setQuestionType] = useState(questionsTypes[0]);
 
-  const quizMock = {
-    collectionId: '66y533j8gxkn4jh',
-    collectionName: 'quiz',
-    created: '2023-04-12 08:07:29.676Z',
-    id: '372aa5nmgxuuioe',
-    name: 'Wieczorowy',
-    updated: '2023-04-12 08:07:29.676Z',
-    user: 'htr0nfhiitojqjt',
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     addQuiz(userObject.id, quizName).then((data) => {
@@ -38,14 +29,23 @@ const UserPage = () => {
     });
   };
 
+  const handleClose = () => {
+    router.replace(`/presenter/${user}/quizes`);
+  };
+
   const handleQuestionTypeChange = (e) => {
     setQuestionType(questionsTypes.find((type) => type.value === e.value));
+  };
+
+  const handleAddQuestion = (formData, typeOfQuestion) => {
+    const response = addQuestionToQuiz(formData, typeOfQuestion);
+    setQuestions([...questions, response]);
   };
 
   return (
     <div className={sharedStyles.pageContainer}>
       <Image src={logo} alt="exit" className={styles.logo} />
-      {!isEmpty(quizObject) ? (
+      {isEmpty(quizObject) ? (
         <div className={styles.formContainer}>
           <form onSubmit={handleSubmit} className={styles.inputForm}>
             <label htmlFor="quiz-name" className={styles.inputLabel}>
@@ -68,7 +68,12 @@ const UserPage = () => {
         </div>
       ) : (
         <>
-          <h2 className={styles.createQuizTitle}>Quiz został stworzony</h2>
+          <div className={styles.quizNameContainer}>
+            <h2 className={styles.createQuizTitle}>{quizObject.name}</h2>
+            <p className={styles.numberOfQuizes}>
+              Pytań dodano: {questions.length}
+            </p>
+          </div>
           <div className={styles.changeQuestionContainer}>
             <Dropdown
               options={questionsTypes.map((type) => type.value)}
@@ -79,7 +84,12 @@ const UserPage = () => {
             />
           </div>
           <div className={styles.addQuestionFormContainer}>
-            <AddQuestionForm quiz={quizMock} questionType={questionType} />
+            <AddQuestionForm
+              quiz={quizObject}
+              questionType={questionType}
+              handleClose={handleClose}
+              handleAddQuestion={handleAddQuestion}
+            />
           </div>
         </>
       )}
