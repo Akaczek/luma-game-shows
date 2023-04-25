@@ -10,30 +10,14 @@ export const addQuiz = async (userId, quizName) => {
   return response.data;
 };
 
-export const addQuizQuestion = (quizId, formData, setCallback) => {
+export const addQuestionToQuiz = (formData, collectionType) => {
   axios
-    .post(`${databaseURL}collections/quiz_question/records`, formData, {
+    .post(`${databaseURL}collections/${collectionType}/records`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     })
     .then((response) => {
-      setCallback(response.data);
-    });
-};
-
-export const addOpenQuestion = (quizId, formData, setCallback) => {
-  axios
-    .post(
-      `${databaseURL}collections/open_question/records`,
-      { ...formData, quiz: quizId },
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }
-    )
-    .then((response) => {
-      setCallback(response.data);
+      return response.data;
     });
 };
