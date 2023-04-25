@@ -19,8 +19,8 @@ const UserPage = () => {
   const [userQuizes, setUserQuizes] = useUserQuizes(userObject.id);
   const [searchText, setSearchText] = useState('');
 
-  const handleRunQuiz = () => {
-    router.push(`/presenter/${userObject.username}/runQuiz`); //todo
+  const handleRunQuiz = (quizId) => {
+    router.push(`/presenter/${userObject.username}/${quizId}`); //todo
   };
 
   const handleSearchChange = (event) => {
