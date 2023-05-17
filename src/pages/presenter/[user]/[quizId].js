@@ -1,6 +1,5 @@
 import { useSingleUser, useUserQuizes } from '@/network/getData';
 import React from 'react';
-import '../../../styles/presenter/user/quizId.module.css';
 import sharedStyles from '../../../styles/presenter/sharedPresenterStyles.module.css';
 import styles from '../../../styles/presenter/user/quizId.module.css';
 import Image from 'next/image';
@@ -25,7 +24,7 @@ const RunQuiz = () => {
   const [userObject, setUserObject] = useSingleUser(user);
 
   const gameQuize = '134270';
-  const userQty = 5;
+  const userQty = 1;
   let cssClass = '';
 
   const handleRunQuiz = () => {
@@ -70,12 +69,10 @@ const RunQuiz = () => {
             <span className={styles.quizQRCodeLbl}>Tu bedzie kod qr</span>
           </div>
         </div>
-        <div className={styles.startGameContainer}>
-          <div
-            className={
-              userQty !== 0 ? styles.participantQtyInfo : styles.hidden
-            }
-          >
+        <div
+          className={userQty !== 0 ? styles.startGameContainer : styles.hidden}
+        >
+          <div className={styles.participantQtyInfo}>
             <Image
               src={groupImageFile}
               alt="group"
