@@ -6,19 +6,20 @@ const TestSocket = () => {
   const [value, setValue] = useState('');
   const [connected, setConnected] = useState(false);
   const [socket, setSocket] = useState(null);
+  const [numberToJoin, setNumberToJoin] = useState([])
 
   const extractNumber = () => {
-    const number = value.match(/\d+/g);
+    const number = value.match(/\d+/g).join('');
     console.log(number);
-    return number;
+    setNumberToJoin([number.slice(0, 1), number.slice(1)]);
   };
 
   const connectToSocket = () => {
-    const socket = io('http://localhost:3001');
+    const socket = io(`${numberToJoin[0]}.tcp.eu.ngrok.io:${numberToJoin[1]}`);
     socket.on('connect', () => {
       setConnected(true);
       setSocket(socket);
-      socket.emit('join', { type: 'player' });
+      socket.emit('join', { type: 'player', userName: 'test' });
       console.log('connected');
     });
 

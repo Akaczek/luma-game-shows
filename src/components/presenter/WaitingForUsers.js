@@ -15,19 +15,17 @@ const userNames = [
   { name: 'Łukasz', id: 5 },
 ];
 
-const WaitingForUsers = ({ quizId, user, handleRunQuiz }) => {
+const WaitingForUsers = ({ users, handleRunQuiz, handleExit }) => {
 
-  const gameQuize = '134270';
-  const userQty = 0;
+  const gameQuizCode = '134270';
+  const userQty = Object.entries(users).length;
   let cssClass = '';
 
   return (
     <>
       <div className={styles.header}>
         <Image src={logo} alt="logo" className={styles.logo} />
-        <Link href="/">
-          <Image src={exitImageFile} alt="exit" className={styles.exitImage} />
-        </Link>
+        <Image src={exitImageFile} alt="exit" className={styles.exitImage} onClick={handleExit} />
       </div>
       <div className={styles.gameInfoContainer}>
         <div
@@ -53,7 +51,7 @@ const WaitingForUsers = ({ quizId, user, handleRunQuiz }) => {
           </div>
           <div className={styles.quizCode}>
             <span className={styles.quizCodeLbl}>Kod gry:</span>
-            <span className={styles.quizCodeText}>{gameQuize}</span>
+            <span className={styles.quizCodeText}>{gameQuizCode}</span>
           </div>
           <div className={styles.quizQRCode}>
             <span className={styles.quizQRCodeLbl}>Tu bedzie kod qr</span>
@@ -78,15 +76,15 @@ const WaitingForUsers = ({ quizId, user, handleRunQuiz }) => {
 
         {userQty > 0 ? (
           <div className={styles.quizUsersContainer}>
-            {userNames.map((user) => {
+            {Object.entries(users).map(([id, user]) => {
               cssClass = 'quizUserColor' + getRandomInt(1, 4).toString();
               console.log(cssClass);
               return (
                 <div
                   className={`${styles.quizUser}  ${styles[cssClass]}`}
-                  key={user.id}
+                  key={id}
                 >
-                  <span className={styles.quizUserName}>{user.name}</span>
+                  <span className={styles.quizUserName}>{user.userName}</span>
                 </div>
               );
             })}
