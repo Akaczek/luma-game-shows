@@ -26,11 +26,11 @@ const QuestionPage = () => {
             świecie? Jaki jest najwyższy szczyt na świecie?
           </div>
         </div>
-        {/* <QuizAnswers
+        <QuizAnswers
                     answerLetters={answers}
                     isAnswerBig={isAnswerBig}
-                /> */}
-        <OpenAnswer />
+                />
+        {/* <OpenAnswer /> */}
       </div>
     </>
   );

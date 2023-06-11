@@ -19,7 +19,7 @@ export default function Home() {
           <Link href="/participant/joinPage" className={styles.linkBox}>
             <span className={styles.linkBoxTitle}>Jesteś uczestnikiem?</span>
             <span className={styles.linkBoxLink}>
-              Kliknuj tutaj, aby rozpocząć udział w teleturnieju!
+              Kliknij tutaj, aby rozpocząć udział w teleturnieju!
             </span>
           </Link>
           <Link
