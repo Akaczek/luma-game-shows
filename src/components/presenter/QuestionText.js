@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from '../../styles/presenter/QuestionText.module.css';
 
 const QuestionText = ({ questionText, time }) => {
@@ -7,9 +8,8 @@ const QuestionText = ({ questionText, time }) => {
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
-          display="optional"
         />
-        <span class="material-symbols-outlined">update</span>
+        <span className="material-symbols-outlined">update</span>
         {time}
       </div>
       <h1 className={styles.questionText}>{questionText}</h1>

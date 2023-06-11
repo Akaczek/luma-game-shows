@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from '../../styles/presenter/quizTextAnswers.module.css';
 
 const QuizTextAnswers = ({ answers }) => {

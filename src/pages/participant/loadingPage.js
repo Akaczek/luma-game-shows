@@ -1,4 +1,5 @@
 import styles from '../../styles/participant/waitingForAnswers.module.css';
+import React from 'react';
 import { PulseLoader } from 'react-spinners';
 
 const LoadingPage = () => {

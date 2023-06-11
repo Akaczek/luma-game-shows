@@ -4,7 +4,7 @@ import { addQuiz } from '@/network/postData';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { isEmpty } from 'ramda';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import logo from '../../../../public/luma_logo.png';

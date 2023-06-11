@@ -4,11 +4,9 @@ import sharedStyles from '../../../styles/presenter/sharedPresenterStyles.module
 import styles from '../../../styles/presenter/user/quizId.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
-import logo from '../../../../public/luma_logo.png';
-import exitImageFile from '../../../../public/exit.svg';
-import groupImageFile from '../../../../public/group.svg';
 import { useRouter } from 'next/router';
 import { getRandomInt } from '../../../utils/random';
+import WaitingForUsers from '@/components/presenter/WaitingForUsers';
 
 const userNames = [
   { name: 'Jan', id: 1 },
@@ -20,100 +18,18 @@ const userNames = [
 
 const RunQuiz = () => {
   const router = useRouter();
-  const { quizId } = router.query;
-  const { user } = router.query;
+  const { quizId, user } = router.query;
   const [userObject, setUserObject] = useSingleUser(user);
-
-  const gameQuize = '134270';
-  const userQty = 1;
-  let cssClass = '';
 
   const handleRunQuiz = () => {
     console.log('start');
     //todo - get question number from db
     //todo - wyslac serwerowi ze rozpoczynamy gre
-    const questionNumber = 1;
-    router.push(
-      `/presenter/${userObject.username}/game/${quizId}/question/${questionNumber}`
-    ); //todo
   };
 
   return (
     <div className={sharedStyles.pageContainer}>
-      <div className={styles.header}>
-        <Image src={logo} alt="logo" className={styles.logo} />
-        <Link href="/">
-          <Image src={exitImageFile} alt="exit" className={styles.exitImage} />
-        </Link>
-      </div>
-      <div className={styles.gameInfoContainer}>
-        <div
-          className={userQty === 0 ? styles.participantQtyInfo : styles.hidden}
-        >
-          <Image
-            src={groupImageFile}
-            alt="group"
-            className={styles.participantQtyImg}
-          />
-          <span className={styles.participantQtyText}>0</span>
-        </div>
-        <div
-          className={
-            userQty === 0
-              ? styles.quizInfoContainer
-              : `${styles.quizInfoContainer} ${styles.smaller}`
-          }
-        >
-          <div className={styles.quizInfo}>
-            <span className={styles.quizInfoText}>Dołącz do teleturnieju:</span>
-            <span className={styles.quizInfoText}>www.luma/join.pl</span>
-          </div>
-          <div className={styles.quizCode}>
-            <span className={styles.quizCodeLbl}>Kod gry:</span>
-            <span className={styles.quizCodeText}>{gameQuize}</span>
-          </div>
-          <div className={styles.quizQRCode}>
-            <span className={styles.quizQRCodeLbl}>Tu bedzie kod qr</span>
-          </div>
-        </div>
-        <div
-          className={userQty !== 0 ? styles.startGameContainer : styles.hidden}
-        >
-          <div className={styles.participantQtyInfo}>
-            <Image
-              src={groupImageFile}
-              alt="group"
-              className={styles.participantQtyImg}
-            />
-            <span className={styles.participantQtyText}>{userQty}</span>
-          </div>
-
-          <button className={styles.runButton} onClick={handleRunQuiz}>
-            Start
-          </button>
-        </div>
-
-        {userQty > 0 ? (
-          <div className={styles.quizUsersContainer}>
-            {userNames.map((user) => {
-              cssClass = 'quizUserColor' + getRandomInt(1, 4).toString();
-              console.log(cssClass);
-              return (
-                <div
-                  className={`${styles.quizUser}  ${styles[cssClass]}`}
-                  key={user.id}
-                >
-                  <span className={styles.quizUserName}>{user.name}</span>
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <span className={styles.noUsersText}>
-            Oczekiwanie na użytkowników...
-          </span>
-        )}
-      </div>
+      <WaitingForUsers quizId={quizId} user={userObject} handleRunQuiz={handleRunQuiz}/>
     </div>
   );
 };
