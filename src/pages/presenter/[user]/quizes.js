@@ -10,7 +10,7 @@ import exitImageFile from '../../../../public/exit.svg';
 import smileImageFile from '../../../../public/smile.svg';
 import Link from 'next/link';
 import Table from '@/components/presenter/Table';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const UserPage = () => {
   const router = useRouter();

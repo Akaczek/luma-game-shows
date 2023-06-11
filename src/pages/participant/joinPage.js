@@ -1,9 +1,10 @@
 import Image from 'next/image';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import logo from '../../../public/luma_logo.png';
 import styles from '../../styles/participant/joinPage.module.css';
+
 const JoinPage = () => {
-  const submitJoining = () => {};
+  const submitJoining = () => { };
   const [gameCode, setGameCode] = useState('');
   const [userNick, setUserNick] = useState('');
   return (

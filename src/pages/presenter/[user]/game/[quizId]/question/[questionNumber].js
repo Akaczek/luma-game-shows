@@ -36,7 +36,7 @@ const gameQuestion = () => {
       </div>
       <div className={styles.gameQuestionContainer}>
         <div className={styles.clockContainer}>
-          <span class="material-symbols-outlined biggerIcon">schedule</span>
+          <span className="material-symbols-outlined biggerIcon">schedule</span>
           {/* zegar */}
           <span className={styles.clockTimeLeft}>{timeLeft}</span>
         </div>

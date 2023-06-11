@@ -1,4 +1,5 @@
 import styles from '../../styles/participant/waitingForAnswers.module.css';
+import React from 'react';
 import { ClockLoader } from 'react-spinners';
 
 const waitingForAnswersPage = () => {

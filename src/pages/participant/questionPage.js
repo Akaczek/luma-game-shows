@@ -3,6 +3,7 @@ import QuizAnswers from '@/components/participant/quizAnswers';
 import { createAnswerLetters, calculateAnswerHeight } from '@/utils/answers';
 import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
 import exitImageFile from '../../../public/exit.svg';
 import OpenAnswer from '@/components/participant/openAnswer';
 

@@ -1,6 +1,7 @@
 import { isEmpty } from 'ramda';
 import styles from '../../styles/presenter/addQuestionForm.module.css';
 import { useEffect, useState } from 'react';
+import React from 'react';
 
 const AddQuestionForm = ({
   quiz,
@@ -73,7 +74,7 @@ const AddQuestionForm = ({
       if (!isEmpty(answer_4)) {
         formData.append('answer_4', answer_4);
       }
-      formData.append('real_answer', realAnswerClose);
+      formData.append('real_answer', realAnswerClose.toString());
     }
 
     if (photo) {
@@ -187,7 +188,7 @@ const AddQuestionForm = ({
               id="realAnswerClose"
               name="realAnswerClose"
               value={realAnswerClose}
-              onChange={(e) => setRealAnswerClose(e.target.value)}
+              onChange={(e) => setRealAnswerClose(parseInt(e.target.value))}
               className={styles.inputValueNumber}
               min={1}
               max={maxAnswerValue}
@@ -215,7 +216,7 @@ const AddQuestionForm = ({
               Zdjęcie
             </label>
             <input
-              key={updateState}
+              key={updateState.toString()}
               type="file"
               accept=".jpg, .jpeg, .png"
               id="image"
