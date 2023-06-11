@@ -1,0 +1,92 @@
+.logo {
+  width: 20%;
+  max-width: 200px;
+  height: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  width: 100%;
+  padding-top: 10px;
+  height: 10%;
+}
+
+.exitImage {
+  position: absolute;
+  right: 50px;
+  top: 10px;
+}
+
+.exitImage:hover {
+  cursor: pointer;
+}
+
+.gameQuestionContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 45%;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 20px;
+  /* background-color: rebeccapurple; */
+}
+
+.clockContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 10%;
+  /* background-color: red; */
+}
+
+.clockTimeLeft {
+  font-size: 36px;
+}
+
+.questionContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+  height: 100%;
+  /* background-color: blue; */
+  /* color: white; */
+  font-size: 1.9rem;
+  /* font-weight: bold; */
+  text-align: center;
+}
+
+.answersContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 15%;
+}
+
+.gameAnswersContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 45%;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 10px;
+  /* background-color: green; */
+}
+
+.answeredLbl {
+  font-size: xxx-large;
+}
+
+.answeredTxt {
+  font-size: x-large;
+}

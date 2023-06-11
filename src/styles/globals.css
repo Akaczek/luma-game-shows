@@ -380,3 +380,7 @@ div#__next > div {
   color: white;
   font-size: 60px !important;
 }
+
+.biggerIcon {
+  font-size: 40px;
+}

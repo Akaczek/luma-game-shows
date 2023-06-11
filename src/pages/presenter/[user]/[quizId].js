@@ -20,6 +20,7 @@ const userNames = [
 
 const RunQuiz = () => {
   const router = useRouter();
+  const { quizId } = router.query;
   const { user } = router.query;
   const [userObject, setUserObject] = useSingleUser(user);
 
@@ -29,6 +30,12 @@ const RunQuiz = () => {
 
   const handleRunQuiz = () => {
     console.log('start');
+    //todo - get question number from db
+    //todo - wyslac serwerowi ze rozpoczynamy gre
+    const questionNumber = 1;
+    router.push(
+      `/presenter/${userObject.username}/game/${quizId}/question/${questionNumber}`
+    ); //todo
   };
 
   return (
