@@ -2,7 +2,7 @@ import styles from '../../styles/participant/waitingForAnswers.module.css';
 import React from 'react';
 import { PulseLoader } from 'react-spinners';
 
-const waitingForStartPage = () => {
+const WaitingForStartPage = () => {
   const participantCount = 5;
   return (
     <div className={styles.waitingForAnswersPageContainer}>
@@ -10,12 +10,12 @@ const waitingForStartPage = () => {
       <div className={styles.loaderContainer}>
         <PulseLoader color="white" size={30} speedMultiplier={0.7} />
       </div>
-      <div>
+      {/* <div>
         <div className={styles.answerState}>{participantCount}</div>
         <div className={styles.answerLabel}>UCZESTNIKÓW</div>
-      </div>
+      </div> */}
     </div>
   );
 };
 
-export default waitingForStartPage;
+export default WaitingForStartPage;

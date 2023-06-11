@@ -16,7 +16,7 @@ export default function Home() {
       <div className={sharedStyles.pageContainer}>
         <Image src={logo} alt="exit" className={styles.logo} />
         <div className={styles.boxesContainer}>
-          <Link href="/participant/joinPage" className={styles.linkBox}>
+          <Link href="/participant/game" className={styles.linkBox}>
             <span className={styles.linkBoxTitle}>Jesteś uczestnikiem?</span>
             <span className={styles.linkBoxLink}>
               Kliknij tutaj, aby rozpocząć udział w teleturnieju!

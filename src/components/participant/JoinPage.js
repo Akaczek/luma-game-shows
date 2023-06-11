@@ -3,15 +3,20 @@ import React, { useState } from 'react';
 import logo from '../../../public/luma_logo.png';
 import styles from '../../styles/participant/joinPage.module.css';
 
-const JoinPage = () => {
-  const submitJoining = () => { };
+const JoinPage = ({ connectToRoom }) => {
   const [gameCode, setGameCode] = useState('');
   const [userNick, setUserNick] = useState('');
+
   return (
     <div className="gradient-animation-1">
       <Image src={logo} alt="exit" className={styles.logo} />
       <div className={styles.formBackground}>
-        <form className={styles.joinForm} onSubmit={submitJoining}>
+        <form
+          className={styles.joinForm}
+          onSubmit={(e) => {
+            e.preventDefault();
+            connectToRoom(gameCode, userNick);
+          }}>
           <label htmlFor="game-code-input" className={styles.inpuLabel}>
             KOD GRY
           </label>
