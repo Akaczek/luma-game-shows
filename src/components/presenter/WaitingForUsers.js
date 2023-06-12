@@ -5,7 +5,7 @@ import styles from '../../styles/presenter/user/quizId.module.css'
 import logo from '../../../public/luma_logo.png';
 import exitImageFile from '../../../public/exit.svg';
 import groupImageFile from '../../../public/group.svg';
-import { getRandomInt } from '@/utils/random';
+import { getRandomInt } from '@/utils/functions';
 
 const userNames = [
   { name: 'Jan', id: 1 },

@@ -1,18 +1,13 @@
 import { useState } from 'react';
 import React from 'react';
 import { io } from 'socket.io-client';
-import JoinPage from '@/components/participant/joinPage';
-import WaitingForStartPage from '@/components/participant/waitingForStartPage';
+import JoinPage from '@/components/participant/JoinPage';
+import WaitingForStartPage from '@/components/participant/WaitingForStartPage';
+import { extractNumber } from '@/utils/functions';
 
 const Game = () => {
   const [connected, setConnected] = useState(false);
   const [userSocket, setUserSocket] = useState(null);
-
-  const extractNumber = (value) => {
-    const number = value.match(/\d+/g).join('');
-    console.log(number);
-    return [number.slice(0, 1), number.slice(1)];
-  };
 
   const connectToRoom = (gameCode, userName) => {
     const numberToJoin = extractNumber(gameCode);

@@ -10,6 +10,7 @@ const RunQuiz = () => {
   const { quizId, user } = router.query;
   const [userSocket, setUserSocket] = useState(null);
   const [room, setRoom] = useState({});
+  const [gameStarted, setGameStarted] = useState(false);
 
   const connectToSocket = () => {
     const socket = io('http://localhost:8080');
@@ -29,6 +30,13 @@ const RunQuiz = () => {
       setRoom(room);
     });
 
+    socket.on('game_started', () => {
+      console.log('game_started');
+    });
+
+    socket.on('next_question', (question) => {
+      console.log('next_question', question);
+    });
   };
 
   const handleExit = () => {
@@ -38,9 +46,7 @@ const RunQuiz = () => {
   };
 
   const handleRunQuiz = () => {
-    console.log('start');
-    //todo - get question number from db
-    //todo - wyslac serwerowi ze rozpoczynamy gre
+    userSocket.emit('start_game', quizId);
   };
 
   return (
@@ -50,23 +56,27 @@ const RunQuiz = () => {
       </Head>
       <div className={sharedStyles.pageContainer}>
         {userSocket
+        ? gameStarted
           ? (
+            <h1>Quiz</h1>
+          )
+          : (
             <WaitingForUsers
               users={room.players ?? []}
               handleRunQuiz={handleRunQuiz}
               handleExit={handleExit} />
           )
-          : (
-            <>
-              <h1>Czy chcesz uruchomić ten quiz?</h1>
-              <div className={sharedStyles.buttonsContainer}>
-                <button className={sharedStyles.buttonStylesRed} onClick={() => {
-                  router.replace(`/presenter/${user}/quizes`);
-                }}>Powrót</button>
-                <button className={sharedStyles.buttonStylesGreen} onClick={connectToSocket}>Uruchom</button>
-              </div>
-            </>
-          )}
+        : (
+          <>
+            <h1>Czy chcesz uruchomić ten quiz?</h1>
+            <div className={sharedStyles.buttonsContainer}>
+              <button className={sharedStyles.buttonStylesRed} onClick={() => {
+                router.replace(`/presenter/${user}/quizes`);
+              }}>Powrót</button>
+              <button className={sharedStyles.buttonStylesGreen} onClick={connectToSocket}>Uruchom</button>
+            </div>
+          </>
+        )}
       </div>
     </>
   );
