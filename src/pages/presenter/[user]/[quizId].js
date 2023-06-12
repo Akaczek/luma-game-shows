@@ -1,4 +1,5 @@
 import WaitingForUsers from '@/components/presenter/WaitingForUsers';
+import PresenterQuestion from '@/components/presenter/PresenterQuestion';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -11,31 +12,38 @@ const RunQuiz = () => {
   const [userSocket, setUserSocket] = useState(null);
   const [room, setRoom] = useState({});
   const [gameStarted, setGameStarted] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(null);
 
   const connectToSocket = () => {
     const socket = io('http://localhost:8080');
     socket.on('connect', () => {
       setUserSocket(socket);
       socket.emit('join', { type: 'presenter', userName: user });
-      console.log('connected');
     });
 
     socket.on('user_disconnected', (room) => {
-      console.log('user_disconnected', room);
       setRoom(room);
     });
 
     socket.on('user_connected', (room) => {
-      console.log('user_connected', room);
       setRoom(room);
     });
 
     socket.on('game_started', () => {
       console.log('game_started');
+      setGameStarted(true);
     });
 
     socket.on('next_question', (question) => {
       console.log('next_question', question);
+      setCurrentQuestion(question);
+    });
+
+    socket.on('game_finished', () => {
+      console.log('game_finished');
+      setGameStarted(false);
+      setCurrentQuestion(null);
+      //TODO: redirect to results page
     });
   };
 
@@ -58,7 +66,7 @@ const RunQuiz = () => {
         {userSocket
         ? gameStarted
           ? (
-            <h1>Quiz</h1>
+            <PresenterQuestion question={currentQuestion}/>
           )
           : (
             <WaitingForUsers
