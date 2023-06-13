@@ -1,12 +1,17 @@
 import React from 'react';
 import styles from '../../styles/participant/quizAnswers.module.css';
 
-const QuizAnswers = ({ answerLetters, isAnswerBig }) => {
+const QuizAnswers = ({ answerLetters, isAnswerBig, sendAnswer }) => {
   let cssClass = '';
 
   const onClickAnswer = (letter) => {
-    alert('kliknieto ' + letter);
+    if (letter === 'A') sendAnswer(1);
+    else if (letter === 'B') sendAnswer(2);
+    else if (letter === 'C') sendAnswer(3);
+    else if (letter === 'D') sendAnswer(4);
   };
+
+  console.log(answerLetters);
 
   return (
     <div className={styles.answersContainer}>

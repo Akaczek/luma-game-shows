@@ -7,8 +7,13 @@ import React from 'react';
 import exitImageFile from '../../../public/exit.svg';
 import OpenAnswer from '@/components/participant/openAnswer';
 
-const QuestionPage = () => {
-  const answersQuantity = 4;
+const QuestionPage = ({
+  answerType,
+  questionText,
+  sendAnswer,
+  answersQuantity,
+}) => {
+  // const answersQuantity = 4;
   const answers = createAnswerLetters(answersQuantity);
   const isAnswerBig = calculateAnswerHeight(answersQuantity);
   return (
@@ -18,20 +23,17 @@ const QuestionPage = () => {
       </Link>
       <div className={styles.questionPageContainer}>
         <div className={styles.question}>
-          <div className={styles.questionText}>
-            Jaki jest najwyższy szczyt na świecie? Jaki jest najwyższy szczyt na
-            świecie? Jaki jest najwyższy szczyt na świecie? Jaki jest najwyższy
-            szczyt na świecie? Jaki jest najwyższy szczyt na świecie?Jaki jest
-            najwyższy szczyt na świecie? Jaki jest najwyższy szczyt na świecie?
-            Jaki jest najwyższy szczyt na świecie? Jaki jest najwyższy szczyt na
-            świecie? Jaki jest najwyższy szczyt na świecie?
-          </div>
+          <div className={styles.questionText}>{questionText}</div>
         </div>
-        <QuizAnswers
-                    answerLetters={answers}
-                    isAnswerBig={isAnswerBig}
-                />
-        {/* <OpenAnswer /> */}
+        {answerType === 'quiz_question' ? (
+          <QuizAnswers
+            answerLetters={answers}
+            isAnswerBig={isAnswerBig}
+            sendAnswer={sendAnswer}
+          />
+        ) : (
+          <OpenAnswer sendAnswer={sendAnswer} />
+        )}
       </div>
     </>
   );

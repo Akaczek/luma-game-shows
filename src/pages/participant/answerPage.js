@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../../styles/participant/answerPage.module.css';
 
-const QuestionPage = () => {
+const AnswerPage = () => {
   const isCorrect = true;
 
   return (
@@ -17,4 +17,4 @@ const QuestionPage = () => {
   );
 };
 
-export default QuestionPage;
+export default AnswerPage;
