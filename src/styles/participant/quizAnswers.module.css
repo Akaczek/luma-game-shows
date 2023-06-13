@@ -46,6 +46,10 @@
   font-size: 100px;
 }
 
+.buttonView:hover {
+  cursor: pointer;
+}
+
 .buttonViewHidden {
   display: hidden;
 }

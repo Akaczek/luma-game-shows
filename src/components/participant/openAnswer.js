@@ -1,12 +1,14 @@
 import styles from '../../styles/participant/openAnswer.module.css';
 import React, { useState } from 'react';
 
-const OpenAnswer = () => {
+const OpenAnswer = ({ sendAnswer }) => {
   const [answer, setAnswer] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Twoja odpowiedz to ' + e.target.openAnswerTextArea.value);
+    // alert('Twoja odpowiedz to ' + e.target.openAnswerTextArea.value);
+    sendAnswer(e.target.openAnswerTextArea.value);
+    setAnswer('');
   };
 
   return (
@@ -18,6 +20,8 @@ const OpenAnswer = () => {
         className={styles.answerInput}
         id="openAnswerTextArea"
         name="openAnswerTextArea"
+        value={answer}
+        onChange={(e) => setAnswer(e.target.value)}
       ></textarea>
       <input type="submit" className={styles.openAnswerButton} />
     </form>
