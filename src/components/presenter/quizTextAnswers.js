@@ -1,49 +1,46 @@
 import React from 'react';
 import styles from '../../styles/presenter/quizTextAnswers.module.css';
+import Image from 'next/image';
 
-const QuizTextAnswers = ({ answers }) => {
-  let cssClass = '';
-
-  const onClickAnswer = (letter) => {
-    alert('kliknieto ' + letter);
-  };
-
+const QuizTextAnswers = ({ questionObject }) => {
   //   isAnswerBig ? styles.answerButtonBig : styles.answerButtonSmall,
+  const { collectionName, photo, id, question, yt_link } = questionObject;
+
+  const answers = [
+    { letter: 'A', text: questionObject?.answer_1 },
+    { letter: 'B', text: questionObject?.answer_2 },
+    { letter: 'C', text: questionObject?.answer_3 },
+    { letter: 'D', text: questionObject?.answer_4 },
+  ];
 
   return (
-    <div className={styles.answersContainer}>
-      {answers.map((answer, index) => {
-        cssClass = 'class' + index.toString();
-        return (
-          <div
-            className={[
-              answer.letter !== 'empty'
-                ? styles.answerButton
-                : styles.answerButtonHidden,
-              styles.answerButtonSmall,
-            ].join(' ')}
-            key={index}
-          >
-            <div
-              className={[
-                answer.letter !== 'empty'
-                  ? styles.buttonView
-                  : styles.buttonViewHidden,
-                styles[cssClass],
-              ].join(' ')}
-              onClick={() => onClickAnswer(answer.letter)}
-            >
-              <span className={styles.letterSpan}>
-                {answer.letter !== 'empty' ? answer.letter : ''}
-              </span>
-              <span className={styles.answerTextSpan}>
-                {answer.letter !== 'empty' ? answer.text : ''}
-              </span>
-            </div>
-          </div>
-        );
-      })}
-    </div>
+    <>
+      {yt_link !== '' && yt_link && (
+        <iframe
+          className={styles.ytVideo}
+          src={yt_link.replace('watch?v=', 'embed/') + '?autoplay=1'}
+          allow="autoplay;"
+          allowFullScreen={false}
+        ></iframe>
+      )}
+      {photo !== '' && photo && (
+        <img src={`http://127.0.0.1:8090/api/files/${collectionName}/${id}/${photo}`} alt="question image" width={300} height={300} className={`${styles.questionImage}`} />
+      )}
+      <div className={styles.questionContainer}> {question} </div>
+      {collectionName === 'quiz_question' && (
+        <div className={styles.answersContainer}>
+          {answers.filter((answer) => answer.text !== '').map((answer, index) => {
+            return (
+              <div className={`${styles.singleAnswerContainer} ${styles['class' + index.toString()]}`}>
+                <span className={styles.answerLabel}>{answer.letter}</span>
+                <span className={styles.answerText}>{answer.text}</span>
+              </div>
+            );
+          })}
+        </div>)
+      }
+
+    </>
   );
 };
 

@@ -1,26 +1,35 @@
-import WaitingForUsers from '@/components/presenter/WaitingForUsers';
+import LoadingPage from '@/components/presenter/LoadingPage';
 import PresenterQuestion from '@/components/presenter/PresenterQuestion';
+import WaitingForUsers from '@/components/presenter/WaitingForUsers';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { io } from 'socket.io-client';
 import sharedStyles from '../../../styles/presenter/sharedPresenterStyles.module.css';
 
-
+const gameState = {
+  BEFORE_CONNECT: 'BEFORE_CONNECT',
+  CONNECTED: 'CONNECTED',
+  GAME_STARTED: 'GAME_STARTED',
+  NEXT_QUESTION: 'NEXT_QUESTION',
+  SHOW_RESULTS: 'SHOW_RESULTS',
+  GAME_FINISHED: 'GAME_FINISHED',
+};
 
 const RunQuiz = () => {
   const router = useRouter();
   const { quizId, user } = router.query;
   const [userSocket, setUserSocket] = useState(null);
   const [room, setRoom] = useState({});
-  const [gameStarted, setGameStarted] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [currentState, setCurrentState] = useState(gameState.BEFORE_CONNECT);
 
   const connectToSocket = () => {
     const socket = io('http://localhost:8080');
     socket.on('connect', () => {
       setUserSocket(socket);
       socket.emit('join', { type: 'presenter', userName: user });
+      setCurrentState(gameState.CONNECTED);
     });
 
     socket.on('user_disconnected', (room) => {
@@ -33,7 +42,7 @@ const RunQuiz = () => {
 
     socket.on('game_started', () => {
       console.log('game_started');
-      setGameStarted(true);
+      setCurrentState(gameState.GAME_STARTED);
     });
 
     socket.on('next_question', (question) => {
@@ -43,7 +52,7 @@ const RunQuiz = () => {
 
     socket.on('game_finished', () => {
       console.log('game_finished');
-      setGameStarted(false);
+      router.replace(`/presenter/${user}/quizes`);
       setCurrentQuestion(null);
       //TODO: redirect to results page
     });
@@ -59,24 +68,10 @@ const RunQuiz = () => {
     userSocket.emit('start_game', quizId);
   };
 
-  return (
-    <>
-      <Head>
-        <title>Quiz</title>
-      </Head>
-      <div className={sharedStyles.pageContainer}>
-        {userSocket
-        ? gameStarted
-          ? (
-            <PresenterQuestion question={currentQuestion}/>
-          )
-          : (
-            <WaitingForUsers
-              users={room.players ?? []}
-              handleRunQuiz={handleRunQuiz}
-              handleExit={handleExit} />
-          )
-        : (
+  const componentToRender = () => {
+    switch (currentState) {
+      case gameState.BEFORE_CONNECT:
+        return (
           <>
             <h1>Czy chcesz uruchomić ten quiz?</h1>
             <div className={sharedStyles.buttonsContainer}>
@@ -86,7 +81,36 @@ const RunQuiz = () => {
               <button className={sharedStyles.buttonStylesGreen} onClick={connectToSocket}>Uruchom</button>
             </div>
           </>
-        )}
+        );
+      case gameState.CONNECTED:
+        return (
+          <WaitingForUsers
+            users={room.players ?? []}
+            handleRunQuiz={handleRunQuiz}
+            handleExit={handleExit} />
+        );
+      case gameState.GAME_STARTED:
+        if (currentQuestion) {
+          return (
+            <PresenterQuestion questionObject={currentQuestion} />
+          );
+        } else {
+          return (
+            <LoadingPage />
+          );
+        }
+      default:
+        <h1>Niezany state</h1>
+    }
+  };
+
+  return (
+    <>
+      <Head>
+        <title>Quiz</title>
+      </Head>
+      <div className={sharedStyles.pageContainer}>
+        {componentToRender()}
       </div>
     </>
   );
