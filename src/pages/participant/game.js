@@ -4,7 +4,8 @@ import { io } from 'socket.io-client';
 import JoinPage from '@/components/participant/JoinPage';
 import WaitingForStartPage from '@/components/participant/WaitingForStartPage';
 import { extractNumber } from '@/utils/functions';
-import QuestionPage from './questionPage';
+import QuestionPage from '@/components/participant/questionPage';
+import ResultsPage from '@/components/participant/resultsPage';
 
 const gameState = {
   BEFORE_CONNECT: 'BEFORE_CONNECT',
@@ -18,6 +19,10 @@ const Game = () => {
   const [currentState, setCurrentState] = useState(gameState.BEFORE_CONNECT);
   const [userSocket, setUserSocket] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(null);
+
+  const score = 3; //todo - od serwera
+  const maxScore = 5;
+  const place = 2;
 
   const connectToRoom = (gameCode, userName) => {
     const numberToJoin = extractNumber(gameCode);
@@ -52,8 +57,11 @@ const Game = () => {
 
     socket.on('game_finished', () => {
       console.log('game_finished');
-      // setCurrentState(gameState.GAME_FINISHED); //todo
-      setCurrentState(gameState.CONNECTED);
+      // todo - get score, maxScore, place from server
+
+      setCurrentState(gameState.GAME_FINISHED); //todo
+      // setCurrentState(gameState.CONNECTED);
+      //
     });
 
     socket.on('disconnect', () => {
@@ -80,14 +88,21 @@ const Game = () => {
   } else if (currentState === gameState.NEXT_QUESTION) {
     return (
       <QuestionPage
-        answerType={currentQuestion.collectionName} //tu sie wyjebao
+        answerType={currentQuestion.collectionName}
         questionText={currentQuestion.question}
         answersQuantity={currentQuestion.answersQuantity}
         sendAnswer={sendAnswer}
       />
     );
   } else if (currentState === gameState.GAME_FINISHED) {
-    return <div>GAME_FINISHED todo ekran wynikow</div>;
+    return (
+      <ResultsPage
+        score={score}
+        maxScore={maxScore}
+        place={place}
+        joinAgain={() => setCurrentState(gameState.BEFORE_CONNECT)}
+      />
+    );
   }
 };
 
