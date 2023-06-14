@@ -24,6 +24,7 @@ const RunQuiz = () => {
   const [room, setRoom] = useState({});
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [currentState, setCurrentState] = useState(gameState.BEFORE_CONNECT);
+  const [realAnswer, setRealAnswer] = useState(null);
 
   const connectToSocket = () => {
     const socket = io('http://localhost:8080');
@@ -42,22 +43,21 @@ const RunQuiz = () => {
     });
 
     socket.on('game_started', () => {
-      console.log('game_started');
       setCurrentState(gameState.NEXT_QUESTION);
     });
 
     socket.on('next_question', (question) => {
-      console.log('next_question', question);
       setCurrentState(gameState.NEXT_QUESTION);
       setCurrentQuestion(question);
     });
 
-    socket.on('close_answers_checked', (realAnswer) => {
-      console.log('close_answers_checked', realAnswer);
+    socket.on('close_answers_checked', (gotRealAnswer) => {
+      setRealAnswer(gotRealAnswer);
       setCurrentState(gameState.SHOW_RESULTS);
     });
 
     socket.on('open_answers_checked_presenter', (roomState) => {
+      console.log('open_answers_checked_presenter', roomState);
       setRoom(roomState);
       setCurrentState(gameState.SHOW_RESULTS);
     });
@@ -69,7 +69,6 @@ const RunQuiz = () => {
     // nextQuestion={nextQuestion} -> klikniecie nastepne pytanie, wyslac serwerowi ze nast pytanie
 
     socket.on('game_finished', () => {
-      console.log('game_finished');
       socket.disconnect();
       setCurrentState(gameState.GAME_FINISHED);
       setCurrentQuestion(null);
@@ -93,6 +92,7 @@ const RunQuiz = () => {
   };
 
   const handleGoNextQuestion = () => {
+    console.log('go_next_question');
     userSocket.emit('go_next_question');
   };
 
@@ -142,7 +142,7 @@ const RunQuiz = () => {
               questionObject={currentQuestion}
               // ifAnswerPage={ifAnswerPage}
               // correctAnswer={correctAnswer}
-              nextQuestion={() => {}}
+              handleNextQuestion={() => {}}
             />
           );
         } else {
@@ -154,9 +154,9 @@ const RunQuiz = () => {
           return (
             <PresenterQuestion
               questionObject={currentQuestion}
-              ifAnswerPage={ifAnswerPage}
-              correctAnswer={correctAnswer}
-              nextQuestion={handleGoNextQuestion}
+              ifAnswerPage={true}
+              correctAnswer={realAnswer}
+              handleNextQuestion={handleGoNextQuestion}
             /> 
           );
         } else {
