@@ -28,12 +28,12 @@ const Game = () => {
   const [currentState, setCurrentState] = useState(gameState.BEFORE_CONNECT);
   const [userSocket, setUserSocket] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(null);
-  const [questionQty, setQuestionQty] = useState(0);
+  // const [questionQty, setQuestionQty] = useState(0);
   const [isCorrect, setIsCorrect] = useState(false);
   const [score, setScore] = useState({
     rank: null,
     score: null,
-    maxScore: null,
+    questionQty: null,
     userName: null,
   });
 
@@ -55,7 +55,7 @@ const Game = () => {
     socket.on('next_question', (question) => {
       console.log('next_question', question);
       setCurrentState(gameState.NEXT_QUESTION);
-      setQuestionQty(questionQty + 1);
+      // setQuestionQty((questionQty) => questionQty + 1);
       let quantity = 4;
       if (question.collectionName === 'quiz_question') {
         if (question.answer_3 === '') quantity = 2;
@@ -87,7 +87,7 @@ const Game = () => {
       setScore({
         rank: message.rank,
         score: message.score,
-        maxScore: questionQty,
+        questionQty: message.questionQty,
         userName: message.userName,
       });
       setCurrentState(gameState.GAME_FINISHED);
@@ -137,7 +137,7 @@ const Game = () => {
     return (
       <ResultsPage
         score={score.score}
-        maxScore={questionQty}
+        maxScore={score.questionQty}
         place={score.rank}
         userName={score.userName}
         joinAgain={() => {
