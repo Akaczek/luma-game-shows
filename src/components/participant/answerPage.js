@@ -1,9 +1,7 @@
 import React from 'react';
 import styles from '../../styles/participant/answerPage.module.css';
 
-const AnswerPage = () => {
-  const isCorrect = true;
-
+const AnswerPage = ({ isCorrect }) => {
   return (
     <div className={isCorrect ? styles.correctAnswer : styles.wrongAnswer}>
       <div className={styles.answerLabelRow}>
