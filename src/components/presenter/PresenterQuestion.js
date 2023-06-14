@@ -24,7 +24,7 @@ const PresenterQuestion = ({
       </div>
       <div className={styles.gameQuestionContainer}>
         <div className={styles.clockContainer}>
-          {ifAnswerPage && (
+          {!ifAnswerPage && (
             <>
               <span className="material-symbols-outlined biggerIcon">
                 schedule
@@ -45,17 +45,17 @@ const PresenterQuestion = ({
         </div>
         <div className={styles.answersContainer}>
           {ifAnswerPage ? (
-            <>
-              <span className={styles.answeredLbl}>1/2 {/*todo*/}</span>
-              <span className={styles.answeredTxt}>ODPOWIEDZI</span>
-            </>
-          ) : (
             <button
               className={sharedStyles.buttonStylesGreen}
               onClick={handleNextQuestion}
             >
               Dalej
             </button>
+          ) : (
+            <>
+              <span className={styles.answeredLbl}>1/2 {/*todo*/}</span>
+              <span className={styles.answeredTxt}>ODPOWIEDZI</span>
+            </>
           )}
         </div>
       </div>
