@@ -6,10 +6,16 @@ import styles from '@/styles/presenter/user/gameQuestion.module.css';
 import exitImageFile from '../../../public/exit.svg';
 import Link from 'next/link';
 
-const ResultsPresenterPage = ({ranking}) => {
+const ResultsPresenterPage = ({ranking, handleExit}) => {
   return (
     <>
       <div className={styles.header}>
+        <button
+          className={`${sharedStyles.buttonStylesGreen} ${sharedStyles.backButton}`}
+          onClick={() => {handleExit()}}
+        >
+          Powrót
+        </button>
         <Image src={logo} alt="logo" className={styles.logo} />
         <div className={styles.userSetupContainer}>
           <Link href="/">

@@ -2,7 +2,7 @@ import LoadingPage from '@/components/presenter/LoadingPage';
 import PresenterQuestion from '@/components/presenter/PresenterQuestion';
 import WaitingForUsers from '@/components/presenter/WaitingForUsers';
 import ResultsOfOpenQuestions from '@/components/presenter/resultsOfOpenQuestions';
-import ResultsPresenterPage from '@/components/presenter/resultsPresenterPage';
+import ResultsPresenterPage from '@/components/presenter/ResultsPresenterPage';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -175,6 +175,7 @@ const RunQuiz = () => {
         return (
           <ResultsPresenterPage
             ranking={ranking} 
+            handleExit={handleFinishGame}
           />
         );
       
