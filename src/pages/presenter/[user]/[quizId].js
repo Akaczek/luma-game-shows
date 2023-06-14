@@ -28,7 +28,6 @@ const RunQuiz = () => {
   const [realAnswer, setRealAnswer] = useState(null);
   const [ranking, setRanking] = useState([]);
   const [gameCode, setGameCode] = useState(null);
-  const [numberOfUsers, setNumberOfUsers] = useState(0);
   const [numberOfAnswers, setNumberOfAnswers] = useState(0);
 
   const connectToSocket = () => {
@@ -41,20 +40,17 @@ const RunQuiz = () => {
 
     socket.on('user_disconnected', (room) => {
       setRoom(room);
-      setNumberOfUsers((numberOfUsers) => numberOfUsers - 1);
     });
 
     socket.on('user_connected', (room) => {
       setRoom(room);
-      setNumberOfUsers((numberOfUsers) => numberOfUsers + 1);
     });
 
     socket.on('game_code', (gameCode) => {
       setGameCode(gameCode);
     });
 
-    socket.on('game_started', (howMany) => {
-      setNumberOfUsers(howMany);
+    socket.on('game_started', () => {
       setCurrentState(gameState.NEXT_QUESTION);
     });
 
@@ -168,7 +164,6 @@ const RunQuiz = () => {
               handleNextQuestion={() => {}}
               handleTimesUp={handleTimesUp}
               numberOfAnswers={numberOfAnswers}
-              numberOfUsers={numberOfUsers}
             />
           );
         } else {

@@ -28,7 +28,7 @@ const QuizTextAnswers = ({ questionObject, ifAnswerPage, correctAnswer }) => {
           src={`http://127.0.0.1:8090/api/files/${collectionName}/${id}/${photo}`}
           alt="question image"
           width={'auto'}
-          height={500}
+          height={350}
           className={styles.questionImage}
         />
       )}

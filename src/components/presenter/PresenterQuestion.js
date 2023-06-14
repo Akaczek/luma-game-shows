@@ -15,8 +15,7 @@ const PresenterQuestion = ({
   correctAnswer,
   handleNextQuestion,
   handleTimesUp,
-  numberOfAnswers,
-  numberOfUsers
+  numberOfAnswers
 }) => {
   const MAX_TIME = 60;
   const [time, setTime] = useState(0);
@@ -75,7 +74,7 @@ const PresenterQuestion = ({
             </button>
           ) : (
             <>
-              <span className={styles.answeredLbl}>{numberOfAnswers}/{numberOfUsers}</span>
+              <span className={styles.answeredLbl}>{numberOfAnswers}</span>
               <span className={styles.answeredTxt}>ODPOWIEDZI</span>
             </>
           )}
