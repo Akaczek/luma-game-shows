@@ -44,7 +44,7 @@ const ResultsOfOpenQuestions = ({handleSendAnswers, players}) => {
                   value={result.correct}
                   onClick={() => toggleAnswer(result)}
                 />
-                <span class="checkmark"></span>
+                <span className="checkmark"></span>
               </label>
             </div>
             <div className={styles.userAnswer}>{result.answer}</div>

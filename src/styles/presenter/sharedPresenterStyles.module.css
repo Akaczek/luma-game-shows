@@ -25,6 +25,12 @@
   max-width: 150px;
 }
 
+.backButton {
+  position: fixed;
+  left: 30px;
+  top: 30px;
+}
+
 .buttonStylesGreen {
   align-self: center;
   width: 50%;
