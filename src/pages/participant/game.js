@@ -23,13 +23,10 @@ const gameState = {
   GAME_FINISHED: 'GAME_FINISHED',
 };
 
-
-
 const Game = () => {
   const [currentState, setCurrentState] = useState(gameState.BEFORE_CONNECT);
   const [userSocket, setUserSocket] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(null);
-  // const [questionQty, setQuestionQty] = useState(0);
   const [isCorrect, setIsCorrect] = useState(false);
   const [score, setScore] = useState({
     rank: null,
@@ -56,7 +53,6 @@ const Game = () => {
     socket.on('next_question', (question) => {
       console.log('next_question', question);
       setCurrentState(gameState.NEXT_QUESTION);
-      // setQuestionQty((questionQty) => questionQty + 1);
       let quantity = 4;
       if (question.collectionName === 'quiz_question') {
         if (question.answer_3 === '') quantity = 2;
@@ -83,8 +79,6 @@ const Game = () => {
 
     socket.on('game_finished', (message) => {
       console.log('game_finished', message);
-      // console.log('socketId', socketId);
-      // setScore(createRank(serverScores, socketId, questionQty));
       setScore({
         rank: message.rank,
         score: message.score,
@@ -92,7 +86,7 @@ const Game = () => {
         userName: message.userName,
       });
       setCurrentState(gameState.GAME_FINISHED);
-      // socket.disconnect(); //TODO
+      socket.disconnect();
     });
 
     socket.on('disconnect', () => {
@@ -143,7 +137,7 @@ const Game = () => {
         userName={score.userName}
         joinAgain={() => {
           setCurrentState(gameState.BEFORE_CONNECT);
-          userSocket.disconnect();
+          // userSocket.disconnect();
         }}
       />
     );

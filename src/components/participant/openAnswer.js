@@ -21,6 +21,7 @@ const OpenAnswer = ({ sendAnswer }) => {
         id="openAnswerTextArea"
         name="openAnswerTextArea"
         value={answer}
+        required
         onChange={(e) => setAnswer(e.target.value)}
       ></textarea>
       <input type="submit" className={styles.openAnswerButton} />

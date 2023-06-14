@@ -15,8 +15,10 @@ const JoinPage = ({ connectToRoom }) => {
           className={styles.joinForm}
           onSubmit={(e) => {
             e.preventDefault();
+            // if (gameCode === '' || userNick === '') return;
             connectToRoom(gameCode, userNick);
-          }}>
+          }}
+        >
           <label htmlFor="game-code-input" className={styles.inpuLabel}>
             KOD GRY
           </label>
@@ -24,6 +26,7 @@ const JoinPage = ({ connectToRoom }) => {
             type="text"
             id="game-code-input"
             name="game-code-input"
+            required
             className={styles.inputJoin}
             value={gameCode}
             onChange={(e) => setGameCode(e.target.value)}
@@ -35,6 +38,7 @@ const JoinPage = ({ connectToRoom }) => {
             type="text"
             id="nick-input"
             name="nick-input"
+            required
             className={styles.inputJoin}
             value={userNick}
             onChange={(e) => setUserNick(e.target.value)}
