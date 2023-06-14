@@ -41,7 +41,7 @@ const Game = () => {
 
   const connectToRoom = (gameCode, userName) => {
     const numberToJoin = extractNumber(gameCode);
-    const socket = io(`${numberToJoin[0]}.tcp.eu.ngrok.io:${numberToJoin[1]}`, { secure: true, reconnect: true, rejectUnauthorized: false });
+    const socket = io(`https://fdbc-150-254-136-104.ngrok-free.app`);
 
     socket.on('connect', () => {
       setCurrentState(gameState.CONNECTED);
