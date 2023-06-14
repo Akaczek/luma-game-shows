@@ -2,46 +2,7 @@ import sharedStyles from '@/styles/presenter/sharedPresenterStyles.module.css';
 import styles from '@/styles/presenter/user/resultsOfOpenQuestions.module.css';
 import { useState } from 'react';
 
-const results = [
-  {
-    userNick: 'user1',
-    answer:
-      'lorem5fsnfnsdnkjvnxdn ffdsgfds gf gs gh gfdsgrdfdgh gdsgt few5 1lorem5fsnfnsdnkjvnxdn ffdsgfds gf gs gh gfdsgrdfdgh gdsgt few5 1',
-    userSocketId: '123',
-  },
-  {
-    userNick: 'user2',
-    answer: 'Odpowiedź 2',
-    userSocketId: '4',
-  },
-  {
-    userNick: 'user3',
-    answer: 'Odpowiedź 3',
-    userSocketId: '5',
-  },
-  {
-    userNick: 'user4',
-    answer: 'Odpowiedź 4',
-    userSocketId: '6',
-  },
-  {
-    userNick: 'user5',
-    answer: 'Odpowiedź 5',
-    userSocketId: '7',
-  },
-  {
-    userNick: 'user6',
-    answer: 'Odpowiedź 6',
-    userSocketId: '8',
-  },
-  {
-    userNick: 'user7',
-    answer: 'Odpowiedź 7',
-    userSocketId: '9',
-  },
-];
-
-const ResultsOfOpenQuestions = ({}) => {
+const ResultsOfOpenQuestions = ({handleSendAnswers, players}) => {
   const [correctAnswers, setCorrectAnswers] = useState([]);
 
   const toggleAnswer = (result) => {
@@ -52,6 +13,12 @@ const ResultsOfOpenQuestions = ({}) => {
     } else {
       setCorrectAnswers([...correctAnswers, result.userSocketId]);
     }
+
+  const results = Object.keys(players).map((player) => ({
+    userNick: players[player].userName,
+    answer: players[player].currentOpenAnswer,
+    userSocketId: player,
+  }));
 
     console.log(correctAnswers);
   };
@@ -86,7 +53,7 @@ const ResultsOfOpenQuestions = ({}) => {
         ))}
       </div>
       <div className={styles.buttonContainer}>
-        <button className={styles.nextQuestionButton}>Następne pytanie</button>
+        <button className={styles.nextQuestionButton} onClick={handleSendAnswers(correctAnswers)}>Następne pytanie</button>
       </div>
     </div>
   );

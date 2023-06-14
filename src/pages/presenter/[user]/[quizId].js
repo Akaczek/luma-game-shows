@@ -1,6 +1,7 @@
 import LoadingPage from '@/components/presenter/LoadingPage';
 import PresenterQuestion from '@/components/presenter/PresenterQuestion';
 import WaitingForUsers from '@/components/presenter/WaitingForUsers';
+import ResultsOfOpenQuestions from '@/components/presenter/resultsOfOpenQuestions';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -42,12 +43,23 @@ const RunQuiz = () => {
 
     socket.on('game_started', () => {
       console.log('game_started');
-      setCurrentState(gameState.GAME_STARTED);
+      setCurrentState(gameState.NEXT_QUESTION);
     });
 
     socket.on('next_question', (question) => {
       console.log('next_question', question);
+      setCurrentState(gameState.NEXT_QUESTION);
       setCurrentQuestion(question);
+    });
+
+    socket.on('close_answers_checked', (realAnswer) => {
+      console.log('close_answers_checked', realAnswer);
+      setCurrentState(gameState.SHOW_RESULTS);
+    });
+
+    socket.on('open_answers_checked_presenter', (roomState) => {
+      setRoom(roomState);
+      setCurrentState(gameState.SHOW_RESULTS);
     });
 
     // todo - na koniec pytania i otrzymanie odpowiedxi prawidlowek, przejsc do PreasenterQuestion z tymi rzeczami,
@@ -59,7 +71,7 @@ const RunQuiz = () => {
     socket.on('game_finished', () => {
       console.log('game_finished');
       socket.disconnect();
-      router.replace(`/presenter/${user}/quizes`);
+      setCurrentState(gameState.GAME_FINISHED);
       setCurrentQuestion(null);
       //TODO: redirect to results page
     });
@@ -74,6 +86,20 @@ const RunQuiz = () => {
   const handleRunQuiz = () => {
     userSocket.emit('start_game', quizId);
   };
+
+  const handleSendOpenAnswers = (sockets) => {
+    userSocket.emit('check_open_answers', sockets);
+    userSocket.emit('go_next_question');
+  };
+
+  const handleGoNextQuestion = () => {
+    userSocket.emit('go_next_question');
+  };
+
+  const handleFinishGame = () => {
+    router.replace(`/presenter/${user}/quizes`);
+  };
+
 
   const componentToRender = () => {
     switch (currentState) {
@@ -99,6 +125,7 @@ const RunQuiz = () => {
             </div>
           </>
         );
+
       case gameState.CONNECTED:
         return (
           <WaitingForUsers
@@ -107,9 +134,9 @@ const RunQuiz = () => {
             handleExit={handleExit}
           />
         );
-      case gameState.GAME_STARTED:
+
+      case gameState.NEXT_QUESTION:
         if (currentQuestion) {
-          //TODO - zmienic na next question
           return (
             <PresenterQuestion
               questionObject={currentQuestion}
@@ -121,14 +148,34 @@ const RunQuiz = () => {
         } else {
           return <LoadingPage />;
         }
-      // TODO - dodac case na wyniki pytania i wywolac:
-      // <PresenterQuestion
-      //       questionObject={currentQuestion}
-      //       ifAnswerPage={ifAnswerPage}
-      //       correctAnswer={correctAnswer}
-      //       nextQuestion={TODO}
-      //     />
-      //zmienic sta
+
+      case gameState.SHOW_RESULTS:
+        if (currentQuestion.collectionName === 'quiz_question') {
+          return (
+            <PresenterQuestion
+              questionObject={currentQuestion}
+              ifAnswerPage={ifAnswerPage}
+              correctAnswer={correctAnswer}
+              nextQuestion={handleGoNextQuestion}
+            /> 
+          );
+        } else {
+          return (
+            <ResultsOfOpenQuestions
+              players={room.players}
+              handleSendAnswers={handleSendOpenAnswers}
+            />
+          );
+        }
+
+      case gameState.GAME_FINISHED:
+        return (
+          <>
+          <h2>Quiz zakończony</h2>
+          <button onClick={handleFinishGame}>Zakończ</button>
+          </>
+        );
+      
       default:
         <h1>Niezany state</h1>;
     }
