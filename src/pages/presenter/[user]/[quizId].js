@@ -50,6 +50,12 @@ const RunQuiz = () => {
       setCurrentQuestion(question);
     });
 
+    // todo - na koniec pytania i otrzymanie odpowiedxi prawidlowek, przejsc do PreasenterQuestion z tymi rzeczami,
+    //state na game results
+    // ifAnswerPage={ifAnswerPage}
+    // correctAnswer={correctAnswer}
+    // nextQuestion={nextQuestion} -> klikniecie nastepne pytanie, wyslac serwerowi ze nast pytanie
+
     socket.on('game_finished', () => {
       console.log('game_finished');
       socket.disconnect();
@@ -76,10 +82,20 @@ const RunQuiz = () => {
           <>
             <h1>Czy chcesz uruchomić ten quiz?</h1>
             <div className={sharedStyles.buttonsContainer}>
-              <button className={sharedStyles.buttonStylesRed} onClick={() => {
-                router.replace(`/presenter/${user}/quizes`);
-              }}>Powrót</button>
-              <button className={sharedStyles.buttonStylesGreen} onClick={connectToSocket}>Uruchom</button>
+              <button
+                className={sharedStyles.buttonStylesRed}
+                onClick={() => {
+                  router.replace(`/presenter/${user}/quizes`);
+                }}
+              >
+                Powrót
+              </button>
+              <button
+                className={sharedStyles.buttonStylesGreen}
+                onClick={connectToSocket}
+              >
+                Uruchom
+              </button>
             </div>
           </>
         );
@@ -88,20 +104,33 @@ const RunQuiz = () => {
           <WaitingForUsers
             users={room.players ?? []}
             handleRunQuiz={handleRunQuiz}
-            handleExit={handleExit} />
+            handleExit={handleExit}
+          />
         );
       case gameState.GAME_STARTED:
         if (currentQuestion) {
+          //TODO - zmienic na next question
           return (
-            <PresenterQuestion questionObject={currentQuestion} />
+            <PresenterQuestion
+              questionObject={currentQuestion}
+              // ifAnswerPage={ifAnswerPage}
+              // correctAnswer={correctAnswer}
+              nextQuestion={() => {}}
+            />
           );
         } else {
-          return (
-            <LoadingPage />
-          );
+          return <LoadingPage />;
         }
+      // TODO - dodac case na wyniki pytania i wywolac:
+      // <PresenterQuestion
+      //       questionObject={currentQuestion}
+      //       ifAnswerPage={ifAnswerPage}
+      //       correctAnswer={correctAnswer}
+      //       nextQuestion={TODO}
+      //     />
+      //zmienic sta
       default:
-        <h1>Niezany state</h1>
+        <h1>Niezany state</h1>;
     }
   };
 
@@ -110,9 +139,7 @@ const RunQuiz = () => {
       <Head>
         <title>Quiz</title>
       </Head>
-      <div className={sharedStyles.pageContainer}>
-        {componentToRender()}
-      </div>
+      <div className={sharedStyles.pageContainer}>{componentToRender()}</div>
     </>
   );
 };
