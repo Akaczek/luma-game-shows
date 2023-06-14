@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import React from 'react';
 import { io } from 'socket.io-client';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 import JoinPage from '@/components/participant/JoinPage';
 import WaitingForStartPage from '@/components/participant/WaitingForStartPage';
 import { extractNumber } from '@/utils/functions';
@@ -24,6 +25,10 @@ const gameState = {
   GAME_FINISHED: 'GAME_FINISHED',
 };
 
+const agent = new HttpsProxyAgent({
+  rejectUnauthorized: false,
+});
+
 const Game = () => {
   const [currentState, setCurrentState] = useState(gameState.BEFORE_CONNECT);
   const [userSocket, setUserSocket] = useState(null);
@@ -39,7 +44,9 @@ const Game = () => {
 
   const connectToRoom = (gameCode, userName) => {
     const numberToJoin = extractNumber(gameCode);
-    const socket = io(`${numberToJoin[0]}.tcp.eu.ngrok.io:${numberToJoin[1]}`);
+    const socket = io(`${numberToJoin[0]}.tcp.eu.ngrok.io:${numberToJoin[1]}`, {
+      agent: agent,
+    });
 
     socket.on('connect', () => {
       setCurrentState(gameState.CONNECTED);
