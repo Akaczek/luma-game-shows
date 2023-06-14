@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import React from 'react';
 import { io } from 'socket.io-client';
-import { HttpsProxyAgent } from 'https-proxy-agent';
 import JoinPage from '@/components/participant/JoinPage';
 import WaitingForStartPage from '@/components/participant/WaitingForStartPage';
 import { extractNumber } from '@/utils/functions';
@@ -25,9 +24,7 @@ const gameState = {
   GAME_FINISHED: 'GAME_FINISHED',
 };
 
-const agent = new HttpsProxyAgent({
-  rejectUnauthorized: false,
-});
+
 
 const Game = () => {
   const [currentState, setCurrentState] = useState(gameState.BEFORE_CONNECT);
