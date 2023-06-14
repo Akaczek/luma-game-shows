@@ -23,8 +23,6 @@ const gameState = {
   GAME_FINISHED: 'GAME_FINISHED',
 };
 
-
-
 const Game = () => {
   const [currentState, setCurrentState] = useState(gameState.BEFORE_CONNECT);
   const [userSocket, setUserSocket] = useState(null);
@@ -138,7 +136,7 @@ const Game = () => {
         userName={score.userName}
         joinAgain={() => {
           setCurrentState(gameState.BEFORE_CONNECT);
-          userSocket.disconnect();
+          // userSocket.disconnect();
         }}
       />
     );
