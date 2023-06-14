@@ -1,4 +1,5 @@
 import styles from '../../styles/participant/questionPage.module.css';
+import React from 'react';
 
 const LookAtPresenter = () => {
   return (

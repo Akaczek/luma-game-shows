@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import exitImageFile from '../../../public/exit.svg';
 
-const ResultsPage = ({ score, maxScore, place, joinAgain }) => {
+const ResultsPage = ({ score, maxScore, place, joinAgain, userName }) => {
   return (
     <>
       <Link href="/" className={sharedStyles.exitImageLink}>
@@ -17,6 +17,11 @@ const ResultsPage = ({ score, maxScore, place, joinAgain }) => {
       </Link>
       <div className={sharedStyles.questionPageContainer}>
         <div className={styles.results}>
+          <div className={styles.resultsLabelTitleRow}>
+            {place < 3
+              ? `Gratulacje, ${userName}!`
+              : `Następnym razem Ci się uda, ${userName}!`}
+          </div>
           <div className={styles.resultsLabelTitleRow}>Wyniki</div>
           <div className={styles.resultsLabelRow}>
             Twój wynik: {score}/{maxScore}

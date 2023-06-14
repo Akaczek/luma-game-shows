@@ -30,11 +30,11 @@ const Game = () => {
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [questionQty, setQuestionQty] = useState(0);
   const [isCorrect, setIsCorrect] = useState(false);
-  const [socketId, setSocketId] = useState(null);
   const [score, setScore] = useState({
     rank: null,
     score: null,
     maxScore: null,
+    userName: null,
   });
 
   const connectToRoom = (gameCode, userName) => {
@@ -45,9 +45,6 @@ const Game = () => {
       setCurrentState(gameState.CONNECTED);
       setUserSocket(socket);
       socket.emit('join', { type: 'player', userName: userName });
-      console.log('connected');
-      console.log('XD. ', socket.id);
-      setSocketId(socket.id.toString());
     });
 
     socket.on('game_started', () => {
@@ -87,6 +84,12 @@ const Game = () => {
       console.log('game_finished', message);
       // console.log('socketId', socketId);
       // setScore(createRank(serverScores, socketId, questionQty));
+      setScore({
+        rank: message.rank,
+        score: message.score,
+        maxScore: questionQty,
+        userName: message.userName,
+      });
       setCurrentState(gameState.GAME_FINISHED);
       // socket.disconnect(); //TODO
     });
@@ -127,15 +130,16 @@ const Game = () => {
   } else if (currentState === gameState.RESULTS) {
     return <AnswerPage isCorrect={isCorrect} />;
   } else if (currentState === gameState.OPEN_RESULTS) {
-    <LookAtPresenter />;
+    return <LookAtPresenter />;
   } else if (currentState === gameState.WAITING_FOR_OTHERS) {
     return <WaitingForAnswersPage />;
   } else if (currentState === gameState.GAME_FINISHED) {
     return (
       <ResultsPage
         score={score.score}
-        maxScore={score.maxScore}
+        maxScore={questionQty}
         place={score.rank}
+        userName={score.userName}
         joinAgain={() => {
           setCurrentState(gameState.BEFORE_CONNECT);
           userSocket.disconnect();
