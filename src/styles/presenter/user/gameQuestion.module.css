@@ -98,3 +98,46 @@
 .answeredTxt {
   font-size: x-large;
 }
+
+.resultsLabel {
+  height: 10%;
+  font-size: xx-large;
+  /* background-color: red; */
+}
+
+.tableContainer {
+  height: 70%;
+  width: 70%;
+  overflow: auto;
+}
+
+.resultsTable {
+  width: 100%;
+  /* background-color: blueviolet; */
+  background-color: var(--grey-background);
+  border-radius: 10px;
+  border-collapse: collapse;
+  font-size: xx-large;
+}
+
+.resultsTable th {
+  padding: 8px;
+  text-align: left;
+}
+
+.resultsTable th {
+  padding: 8px;
+  text-align: left;
+}
+
+.resultsTable td {
+  padding: 16px;
+}
+
+.rightTh {
+  text-align: center;
+}
+
+.boldText {
+  font-weight: bold;
+}
