@@ -67,6 +67,14 @@
   background-color: var(--answer-D-color);
 }
 
+.classWrong {
+  background-color: rgb(248, 45, 45);
+}
+
+.classCorrect {
+  background-color: var(--answer-A-color);
+}
+
 @media (min-width: 768px) {
   .answersContainer {
     max-width: 830px;
