@@ -37,7 +37,7 @@ const ResultsOfOpenQuestions = ({handleSendAnswers, players}) => {
           >
             <div className={styles.userInfo}>
               <span className={styles.userNick}>{result.userNick}</span>
-              <label class="checkboxContainer">
+              <label className="checkboxContainer">
                 <input
                   type="checkbox"
                   className={styles.correctCheckbox}
