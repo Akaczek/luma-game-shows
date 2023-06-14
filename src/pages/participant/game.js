@@ -41,9 +41,7 @@ const Game = () => {
 
   const connectToRoom = (gameCode, userName) => {
     const numberToJoin = extractNumber(gameCode);
-    const socket = io(`${numberToJoin[0]}.tcp.eu.ngrok.io:${numberToJoin[1]}`, {
-      agent: agent,
-    });
+    const socket = io(`${numberToJoin[0]}.tcp.eu.ngrok.io:${numberToJoin[1]}`);
 
     socket.on('connect', () => {
       setCurrentState(gameState.CONNECTED);
