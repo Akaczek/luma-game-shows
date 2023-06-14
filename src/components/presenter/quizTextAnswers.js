@@ -44,12 +44,12 @@ const QuizTextAnswers = ({ questionObject, ifAnswerPage, correctAnswer }) => {
                   className={`${styles.singleAnswerContainer} ${
                     styles['class' + index.toString()]
                   } ${
-                    ifAnswerPage && correctAnswer === index
+                    ifAnswerPage && (correctAnswer - 1) === index
                       ? styles.classCorrect
                       : ''
                   }
                   ${
-                    ifAnswerPage && correctAnswer !== index
+                    ifAnswerPage && (correctAnswer - 1) !== index
                       ? styles.classWrong
                       : ''
                   }`}

@@ -13,15 +13,14 @@ const ResultsOfOpenQuestions = ({handleSendAnswers, players}) => {
     } else {
       setCorrectAnswers([...correctAnswers, result.userSocketId]);
     }
+    console.log(correctAnswers);
+  };
 
   const results = Object.keys(players).map((player) => ({
     userNick: players[player].userName,
     answer: players[player].currentOpenAnswer,
     userSocketId: player,
   }));
-
-    console.log(correctAnswers);
-  };
 
   return (
     <div className={sharedStyles.pageContainer}>
@@ -53,7 +52,7 @@ const ResultsOfOpenQuestions = ({handleSendAnswers, players}) => {
         ))}
       </div>
       <div className={styles.buttonContainer}>
-        <button className={styles.nextQuestionButton} onClick={handleSendAnswers(correctAnswers)}>Następne pytanie</button>
+        <button className={styles.nextQuestionButton} onClick={() => handleSendAnswers(correctAnswers)}>Następne pytanie</button>
       </div>
     </div>
   );

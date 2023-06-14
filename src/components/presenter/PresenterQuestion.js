@@ -47,7 +47,7 @@ const PresenterQuestion = ({
           {ifAnswerPage ? (
             <button
               className={sharedStyles.buttonStylesGreen}
-              onClick={handleNextQuestion}
+              onClick={() => {handleNextQuestion()}}
             >
               Dalej
             </button>
