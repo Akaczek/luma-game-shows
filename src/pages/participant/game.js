@@ -58,7 +58,7 @@ const Game = () => {
     socket.on('game_finished', () => {
       console.log('game_finished');
       // todo - get score, maxScore, place from server
-
+      socket.disconnect();
       setCurrentState(gameState.GAME_FINISHED); //todo
       // setCurrentState(gameState.CONNECTED);
       //

@@ -52,6 +52,7 @@ const RunQuiz = () => {
 
     socket.on('game_finished', () => {
       console.log('game_finished');
+      socket.disconnect();
       router.replace(`/presenter/${user}/quizes`);
       setCurrentQuestion(null);
       //TODO: redirect to results page

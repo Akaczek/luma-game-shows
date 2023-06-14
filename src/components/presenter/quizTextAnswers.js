@@ -31,7 +31,7 @@ const QuizTextAnswers = ({ questionObject }) => {
         <div className={styles.answersContainer}>
           {answers.filter((answer) => answer.text !== '').map((answer, index) => {
             return (
-              <div className={`${styles.singleAnswerContainer} ${styles['class' + index.toString()]}`}>
+              <div key={index} className={`${styles.singleAnswerContainer} ${styles['class' + index.toString()]}`}>
                 <span className={styles.answerLabel}>{answer.letter}</span>
                 <span className={styles.answerText}>{answer.text}</span>
               </div>
