@@ -2,6 +2,7 @@ import LoadingPage from '@/components/presenter/LoadingPage';
 import PresenterQuestion from '@/components/presenter/PresenterQuestion';
 import WaitingForUsers from '@/components/presenter/WaitingForUsers';
 import ResultsOfOpenQuestions from '@/components/presenter/resultsOfOpenQuestions';
+import ResultsPresenterPage from '@/components/presenter/resultsPresenterPage';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -25,6 +26,7 @@ const RunQuiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [currentState, setCurrentState] = useState(gameState.BEFORE_CONNECT);
   const [realAnswer, setRealAnswer] = useState(null);
+  const [ranking, setRanking] = useState([]);
 
   const connectToSocket = () => {
     const socket = io('http://localhost:8080');
@@ -68,10 +70,11 @@ const RunQuiz = () => {
     // correctAnswer={correctAnswer}
     // nextQuestion={nextQuestion} -> klikniecie nastepne pytanie, wyslac serwerowi ze nast pytanie
 
-    socket.on('game_finished', () => {
+    socket.on('game_finished', (gameRanking) => {
       socket.disconnect();
       setCurrentState(gameState.GAME_FINISHED);
       setCurrentQuestion(null);
+      setRanking(gameRanking);
       //TODO: redirect to results page
     });
   };
@@ -170,10 +173,9 @@ const RunQuiz = () => {
 
       case gameState.GAME_FINISHED:
         return (
-          <>
-          <h2>Quiz zakończony</h2>
-          <button onClick={handleFinishGame}>Zakończ</button>
-          </>
+          <ResultsPresenterPage
+            ranking={ranking} 
+          />
         );
       
       default:
