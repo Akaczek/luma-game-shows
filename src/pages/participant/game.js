@@ -6,12 +6,21 @@ import WaitingForStartPage from '@/components/participant/WaitingForStartPage';
 import { extractNumber } from '@/utils/functions';
 import QuestionPage from '@/components/participant/questionPage';
 import ResultsPage from '@/components/participant/resultsPage';
+import AnswerPage from '@/components/participant/answerPage';
+import { set } from 'ramda';
+import LookAtPresenter from '@/components/participant/lookAtPresenter';
+import WaitingForUsers from '@/components/presenter/WaitingForUsers';
+import WaitingForAnswersPage from '@/components/participant/waitingForAnswersPage';
 
 const gameState = {
   BEFORE_CONNECT: 'BEFORE_CONNECT',
   CONNECTED: 'CONNECTED',
   GAME_STARTED: 'GAME_STARTED',
   NEXT_QUESTION: 'NEXT_QUESTION',
+  WAITING_FOR_OTHERS: 'WAITING_FOR_OTHERS',
+  ANSWER: 'ANSWER',
+  RESULTS: 'RESULTS',
+  OPEN_RESULTS: 'OPEN_RESULTS',
   GAME_FINISHED: 'GAME_FINISHED',
 };
 
@@ -19,10 +28,14 @@ const Game = () => {
   const [currentState, setCurrentState] = useState(gameState.BEFORE_CONNECT);
   const [userSocket, setUserSocket] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(null);
-
-  const score = 3; //todo - od serwera
-  const maxScore = 5;
-  const place = 2;
+  const [questionQty, setQuestionQty] = useState(0);
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [socketId, setSocketId] = useState(null);
+  const [score, setScore] = useState({
+    rank: null,
+    score: null,
+    maxScore: null,
+  });
 
   const connectToRoom = (gameCode, userName) => {
     const numberToJoin = extractNumber(gameCode);
@@ -33,6 +46,8 @@ const Game = () => {
       setUserSocket(socket);
       socket.emit('join', { type: 'player', userName: userName });
       console.log('connected');
+      console.log('XD. ', socket.id);
+      setSocketId(socket.id.toString());
     });
 
     socket.on('game_started', () => {
@@ -43,25 +58,37 @@ const Game = () => {
     socket.on('next_question', (question) => {
       console.log('next_question', question);
       setCurrentState(gameState.NEXT_QUESTION);
+      setQuestionQty(questionQty + 1);
       let quantity = 4;
       if (question.collectionName === 'quiz_question') {
         if (question.answer_3 === '') quantity = 2;
         else if (question.answer_4 === '') quantity = 3;
       }
       setCurrentQuestion({ ...question, answersQuantity: quantity });
-      console.log('new next_question', {
-        ...question,
-        answersQuantity: quantity,
-      });
+      setIsCorrect(false);
     });
 
-    socket.on('game_finished', () => {
-      console.log('game_finished');
-      // todo - get score, maxScore, place from server
-      socket.disconnect();
-      setCurrentState(gameState.GAME_FINISHED); //todo
-      // setCurrentState(gameState.CONNECTED);
-      //
+    socket.on('open_answers_checked', () => {
+      console.log('open_answers_checked');
+      setCurrentState(gameState.OPEN_RESULTS);
+    });
+
+    socket.on('good_answer', () => {
+      console.log('good_answer');
+      setIsCorrect(true);
+    });
+
+    socket.on('close_answers_checked', (data) => {
+      console.log('close_answers_checked', data);
+      setCurrentState(gameState.RESULTS);
+    });
+
+    socket.on('game_finished', (message) => {
+      console.log('game_finished', message);
+      // console.log('socketId', socketId);
+      // setScore(createRank(serverScores, socketId, questionQty));
+      setCurrentState(gameState.GAME_FINISHED);
+      // socket.disconnect(); //TODO
     });
 
     socket.on('disconnect', () => {
@@ -79,6 +106,9 @@ const Game = () => {
       answer: answer,
       questionId: currentQuestion.id,
     });
+
+    setCurrentState(gameState.WAITING_FOR_OTHERS);
+    console.log('waiting for others');
   };
 
   if (currentState === gameState.BEFORE_CONNECT) {
@@ -94,13 +124,22 @@ const Game = () => {
         sendAnswer={sendAnswer}
       />
     );
+  } else if (currentState === gameState.RESULTS) {
+    return <AnswerPage isCorrect={isCorrect} />;
+  } else if (currentState === gameState.OPEN_RESULTS) {
+    <LookAtPresenter />;
+  } else if (currentState === gameState.WAITING_FOR_OTHERS) {
+    return <WaitingForAnswersPage />;
   } else if (currentState === gameState.GAME_FINISHED) {
     return (
       <ResultsPage
-        score={score}
-        maxScore={maxScore}
-        place={place}
-        joinAgain={() => setCurrentState(gameState.BEFORE_CONNECT)}
+        score={score.score}
+        maxScore={score.maxScore}
+        place={score.rank}
+        joinAgain={() => {
+          setCurrentState(gameState.BEFORE_CONNECT);
+          userSocket.disconnect();
+        }}
       />
     );
   }
