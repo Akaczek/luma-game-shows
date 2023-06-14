@@ -27,6 +27,9 @@ const RunQuiz = () => {
   const [currentState, setCurrentState] = useState(gameState.BEFORE_CONNECT);
   const [realAnswer, setRealAnswer] = useState(null);
   const [ranking, setRanking] = useState([]);
+  const [gameCode, setGameCode] = useState(null);
+  const [numberOfUsers, setNumberOfUsers] = useState(0);
+  const [numberOfAnswers, setNumberOfAnswers] = useState(0);
 
   const connectToSocket = () => {
     const socket = io('http://localhost:8080');
@@ -38,19 +41,31 @@ const RunQuiz = () => {
 
     socket.on('user_disconnected', (room) => {
       setRoom(room);
+      setNumberOfUsers((numberOfUsers) => numberOfUsers - 1);
     });
 
     socket.on('user_connected', (room) => {
       setRoom(room);
+      setNumberOfUsers((numberOfUsers) => numberOfUsers + 1);
     });
 
-    socket.on('game_started', () => {
+    socket.on('game_code', (gameCode) => {
+      setGameCode(gameCode);
+    });
+
+    socket.on('game_started', (howMany) => {
+      setNumberOfUsers(howMany);
       setCurrentState(gameState.NEXT_QUESTION);
     });
 
     socket.on('next_question', (question) => {
       setCurrentState(gameState.NEXT_QUESTION);
       setCurrentQuestion(question);
+      setNumberOfAnswers(0);
+    });
+
+    socket.on('new_answer', (numberOfAnswers) => {
+      setNumberOfAnswers(numberOfAnswers);
     });
 
     socket.on('close_answers_checked', (gotRealAnswer) => {
@@ -103,6 +118,10 @@ const RunQuiz = () => {
     router.replace(`/presenter/${user}/quizes`);
   };
 
+  const handleTimesUp = () => {
+    userSocket.emit('times_up');
+    setNumberOfAnswers(0);
+  };
 
   const componentToRender = () => {
     switch (currentState) {
@@ -135,6 +154,7 @@ const RunQuiz = () => {
             users={room.players ?? []}
             handleRunQuiz={handleRunQuiz}
             handleExit={handleExit}
+            gameCode={gameCode}
           />
         );
 
@@ -146,6 +166,9 @@ const RunQuiz = () => {
               // ifAnswerPage={ifAnswerPage}
               // correctAnswer={correctAnswer}
               handleNextQuestion={() => {}}
+              handleTimesUp={handleTimesUp}
+              numberOfAnswers={numberOfAnswers}
+              numberOfUsers={numberOfUsers}
             />
           );
         } else {

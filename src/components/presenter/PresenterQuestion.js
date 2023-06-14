@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from '@/styles/presenter/user/gameQuestion.module.css';
 import sharedStyles from '@/styles/presenter/sharedPresenterStyles.module.css';
 import Image from 'next/image';
@@ -6,6 +6,7 @@ import Link from 'next/link';
 import logo from '../../../public/luma_logo.png';
 import exitImageFile from '../../../public/exit.svg';
 import QuizTextAnswers from '@/components/presenter/quizTextAnswers';
+import useInterval from '@/utils/useInterval';
 import { questionsTypes } from '@/utils/constants';
 
 const PresenterQuestion = ({
@@ -13,7 +14,25 @@ const PresenterQuestion = ({
   ifAnswerPage,
   correctAnswer,
   handleNextQuestion,
+  handleTimesUp,
+  numberOfAnswers,
+  numberOfUsers
 }) => {
+  const MAX_TIME = 60;
+  const [time, setTime] = useState(0);
+
+  useInterval(() => {
+    if (ifAnswerPage) return;
+    if (time < MAX_TIME) {
+      setTime(time + 1);
+    } else {
+      setTime(0);
+      handleTimesUp();
+    }
+  }, 1000);
+
+  
+
   return (
     <>
       <div className={styles.header}>
@@ -31,7 +50,7 @@ const PresenterQuestion = ({
               </span>
               <span className={styles.clockTimeLeft}>
                 {/*todo*/}
-                25
+                {MAX_TIME - time}
               </span>
             </>
           )}
@@ -47,13 +66,16 @@ const PresenterQuestion = ({
           {ifAnswerPage ? (
             <button
               className={sharedStyles.buttonStylesGreen}
-              onClick={() => {handleNextQuestion()}}
+              onClick={() => {
+                setTime(0);
+                handleNextQuestion()
+              }}
             >
               Dalej
             </button>
           ) : (
             <>
-              <span className={styles.answeredLbl}>1/2 {/*todo*/}</span>
+              <span className={styles.answeredLbl}>{numberOfAnswers}/{numberOfUsers}</span>
               <span className={styles.answeredTxt}>ODPOWIEDZI</span>
             </>
           )}

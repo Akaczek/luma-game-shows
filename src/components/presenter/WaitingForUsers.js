@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../../styles/presenter/user/quizId.module.css'
 import logo from '../../../public/luma_logo.png';
+import qr_code from '../../../public/qr.png';
 import exitImageFile from '../../../public/exit.svg';
 import groupImageFile from '../../../public/group.svg';
 import { getRandomInt } from '@/utils/functions';
@@ -15,9 +16,7 @@ const userNames = [
   { name: 'Łukasz', id: 5 },
 ];
 
-const WaitingForUsers = ({ users, handleRunQuiz, handleExit }) => {
-
-  const gameQuizCode = '134270';
+const WaitingForUsers = ({ users, handleRunQuiz, handleExit, gameCode }) => {
   const userQty = Object.entries(users).length;
   let cssClass = '';
 
@@ -39,22 +38,22 @@ const WaitingForUsers = ({ users, handleRunQuiz, handleExit }) => {
           <span className={styles.participantQtyText}>0</span>
         </div>
         <div
-          className={
-            userQty === 0
-              ? styles.quizInfoContainer
-              : `${styles.quizInfoContainer} ${styles.smaller}`
-          }
+          className={styles.quizInfoContainer}
         >
           <div className={styles.quizInfo}>
             <span className={styles.quizInfoText}>Dołącz do teleturnieju:</span>
-            <span className={styles.quizInfoText}>www.luma/join.pl</span>
+            <span className={styles.quizInfoText}>luma-game-shows.vercel.app</span>
           </div>
           <div className={styles.quizCode}>
             <span className={styles.quizCodeLbl}>Kod gry:</span>
-            <span className={styles.quizCodeText}>{gameQuizCode}</span>
+            <span className={styles.quizCodeText}>{gameCode}</span>
           </div>
           <div className={styles.quizQRCode}>
-            <span className={styles.quizQRCodeLbl}>Tu bedzie kod qr</span>
+            <Image
+              src={qr_code}
+              alt="qr_code"
+              className={styles.qr_code}
+            />
           </div>
         </div>
         <div

@@ -40,6 +40,7 @@ const Game = () => {
 
   const connectToRoom = (gameCode, userName) => {
     const socket = io(`https://${gameCode}.ngrok-free.app`);
+    // const socket = io(`http://localhost:8080`);
 
     socket.on('connect', () => {
       setCurrentState(gameState.CONNECTED);
