@@ -3,7 +3,6 @@ import React from 'react';
 import { io } from 'socket.io-client';
 import JoinPage from '@/components/participant/JoinPage';
 import WaitingForStartPage from '@/components/participant/WaitingForStartPage';
-import { extractNumber } from '@/utils/functions';
 import QuestionPage from '@/components/participant/questionPage';
 import ResultsPage from '@/components/participant/resultsPage';
 import AnswerPage from '@/components/participant/answerPage';
@@ -40,8 +39,7 @@ const Game = () => {
   });
 
   const connectToRoom = (gameCode, userName) => {
-    const numberToJoin = extractNumber(gameCode);
-    const socket = io(`https://fdbc-150-254-136-104.ngrok-free.app`);
+    const socket = io(`https://${gameCode}.ngrok-free.app`);
 
     socket.on('connect', () => {
       setCurrentState(gameState.CONNECTED);
