@@ -2,7 +2,7 @@ import sharedStyles from '../../styles/presenter/sharedPresenterStyles.module.cs
 import styles from '../../styles/presenter/loginPage.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
-import logo from '../../../public/luma_logo.png';
+import logo from '../../../public/woluma_logo.png';
 import { useState } from 'react';
 
 const Register = () => {

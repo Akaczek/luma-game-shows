@@ -7,7 +7,7 @@ import { isEmpty } from 'ramda';
 import React, { useState } from 'react';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import logo from '../../../../public/luma_logo.png';
+import logo from '../../../../public/woluma_logo.png';
 import sharedStyles from '../../../styles/presenter/sharedPresenterStyles.module.css';
 import styles from '../../../styles/presenter/user/createQuiz.module.css';
 import { questionsTypes } from '../../../utils/constants';

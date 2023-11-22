@@ -29,7 +29,7 @@ const Table = ({ quizes, runQuiz, searchText }) => {
                 <button
                   className={styles.runButton}
                   value={quiz.id}
-                  onClick={handleRunQuiz}
+                  // onClick={handleRunQuiz}
                 >
                   Uruchom
                 </button>

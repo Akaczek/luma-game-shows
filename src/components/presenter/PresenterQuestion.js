@@ -3,7 +3,7 @@ import styles from '@/styles/presenter/user/gameQuestion.module.css';
 import sharedStyles from '@/styles/presenter/sharedPresenterStyles.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
-import logo from '../../../public/luma_logo.png';
+import logo from '../../../public/woluma_logo.png';
 import exitImageFile from '../../../public/exit.svg';
 import QuizTextAnswers from '@/components/presenter/quizTextAnswers';
 import useInterval from '@/utils/useInterval';

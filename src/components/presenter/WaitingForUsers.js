@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../../styles/presenter/user/quizId.module.css'
-import logo from '../../../public/luma_logo.png';
+import logo from '../../../public/woluma_logo.png';
 import qr_code from '../../../public/qr.png';
 import exitImageFile from '../../../public/exit.svg';
 import groupImageFile from '../../../public/group.svg';
@@ -42,7 +42,7 @@ const WaitingForUsers = ({ users, handleRunQuiz, handleExit, gameCode }) => {
         >
           <div className={styles.quizInfo}>
             <span className={styles.quizInfoText}>Dołącz do teleturnieju:</span>
-            <span className={styles.quizInfoText}>luma-game-shows.vercel.app</span>
+            <span className={styles.quizInfoText}>woluma-game-shows.vercel.app</span>
           </div>
           <div className={styles.quizCode}>
             <span className={styles.quizCodeLbl}>Kod gry:</span>

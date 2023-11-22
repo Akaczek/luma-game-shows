@@ -1,0 +1,317 @@
+[
+  {
+    "id": "ftefam1y5us0u6i",
+    "name": "open_question",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "aruureyv",
+        "name": "quiz",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "collectionId": "66y533j8gxkn4jh",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "id": "dlzinwd4",
+        "name": "question",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "min": 0,
+          "max": 512,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "wm8jxekz",
+        "name": "real_answer",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "min": 0,
+          "max": 512,
+          "pattern": ""
+        }
+      }
+    ],
+    "listRule": null,
+    "viewRule": null,
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null,
+    "options": {}
+  },
+  {
+    "id": "tbbmrltn86800hg",
+    "name": "music_question",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "lh9gq0wq",
+        "name": "quiz",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "collectionId": "66y533j8gxkn4jh",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "id": "cdsbk7dx",
+        "name": "question",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "min": 0,
+          "max": 512,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "sefwdctn",
+        "name": "real_answer",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "min": 0,
+          "max": 512,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "qevzsswk",
+        "name": "yt_link",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "min": 0,
+          "max": null,
+          "pattern": "^(https?://)?(www\\.)?youtube\\.com/watch\\?v=[a-zA-Z0-9_-]{11}"
+        }
+      }
+    ],
+    "listRule": null,
+    "viewRule": null,
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null,
+    "options": {}
+  },
+  {
+    "id": "_pb_users_auth_",
+    "name": "users",
+    "type": "auth",
+    "system": false,
+    "schema": [],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "options": {
+      "allowEmailAuth": true,
+      "allowOAuth2Auth": true,
+      "allowUsernameAuth": true,
+      "exceptEmailDomains": null,
+      "manageRule": null,
+      "minPasswordLength": 8,
+      "onlyEmailDomains": null,
+      "requireEmail": false
+    }
+  },
+  {
+    "id": "66y533j8gxkn4jh",
+    "name": "quiz",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "vohecsw0",
+        "name": "user",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": [
+            "username"
+          ]
+        }
+      },
+      {
+        "id": "pbejfwlo",
+        "name": "name",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "min": 0,
+          "max": 128,
+          "pattern": ""
+        }
+      }
+    ],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "options": {}
+  },
+  {
+    "id": "4cpri2lxcjpetb6",
+    "name": "quiz_question",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "dgyktkic",
+        "name": "quiz",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "collectionId": "66y533j8gxkn4jh",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": [
+            "name"
+          ]
+        }
+      },
+      {
+        "id": "yzsr8wqd",
+        "name": "question",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "min": 0,
+          "max": 512,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "oyo8jflk",
+        "name": "answer_1",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "min": 0,
+          "max": 512,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "3vnzoy5t",
+        "name": "answer_2",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "min": 0,
+          "max": 512,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "hgxahr5b",
+        "name": "answer_3",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": 0,
+          "max": 512,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "9vhdyuzj",
+        "name": "answer_4",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": 0,
+          "max": 512,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "fwlitgkv",
+        "name": "real_answer",
+        "type": "number",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": 4
+        }
+      },
+      {
+        "id": "9xow7w1w",
+        "name": "photo",
+        "type": "file",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "maxSize": 5242880,
+          "mimeTypes": [
+            "image/png",
+            "image/jpeg",
+            "image/svg+xml"
+          ],
+          "thumbs": []
+        }
+      }
+    ],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "options": {}
+  }
+]

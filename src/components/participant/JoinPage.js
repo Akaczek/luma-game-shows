@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
-import logo from '../../../public/luma_logo.png';
+import logo from '../../../public/woluma_logo.png';
 import styles from '../../styles/participant/joinPage.module.css';
 
 const JoinPage = ({ connectToRoom }) => {
@@ -16,7 +16,7 @@ const JoinPage = ({ connectToRoom }) => {
           onSubmit={(e) => {
             e.preventDefault();
             // if (gameCode === '' || userNick === '') return;
-            connectToRoom(gameCode, userNick);
+            // connectToRoom(gameCode, userNick);
           }}
         >
           <label htmlFor="game-code-input" className={styles.inpuLabel}>

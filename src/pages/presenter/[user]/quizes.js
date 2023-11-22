@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import sharedStyles from '../../../styles/presenter/sharedPresenterStyles.module.css';
 import { isEmpty } from 'ramda';
 import Image from 'next/image';
-import logo from '../../../../public/luma_logo.png';
+import logo from '../../../../public/woluma_logo.png';
 import search from '../../../../public/search.svg';
 import styles from '../../../styles/presenter/user/quizes.module.css';
 import exitImageFile from '../../../../public/exit.svg';

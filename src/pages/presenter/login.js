@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import logo from '../../../public/luma_logo.png';
+import logo from '../../../public/woluma_logo.png';
 import styles from '../../styles/presenter/loginPage.module.css';
 import sharedStyles from '../../styles/presenter/sharedPresenterStyles.module.css';
 
@@ -30,7 +30,7 @@ const Login = () => {
   return (
     <div className={sharedStyles.pageContainer}>
       <Head>
-        <title>LUMA - game shows</title>
+        <title>WOLUMA - game shows</title>
       </Head>
       <Image src={logo} alt="exit" className={styles.logo} />
       <div className={styles.formBackground}>
