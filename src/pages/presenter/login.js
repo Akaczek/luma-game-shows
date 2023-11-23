@@ -52,9 +52,12 @@ const Login = () => {
             className={styles.submitJoiningBtn}
             value="ZALOGUJ"
           />
-          <Link href="/presenter/register" className={styles.registerInfo}>
+          {/* <Link href="/presenter/register" className={styles.registerInfo}>
             Nie masz konta? Zarejestruj się.
-          </Link>
+          </Link> */}
+          <div href="/presenter/register" className={styles.registerInfo}>
+            Nie masz konta? Zarejestruj się.
+          </div>
         </form>
       </div>
     </div>
