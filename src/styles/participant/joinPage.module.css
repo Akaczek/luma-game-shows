@@ -59,3 +59,8 @@
   max-width: 150px;
   margin-top: 30px;
 }
+
+.submitJoiningBtn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}

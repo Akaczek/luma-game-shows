@@ -6,6 +6,7 @@ import styles from '../../styles/participant/joinPage.module.css';
 const JoinPage = ({ connectToRoom }) => {
   const [gameCode, setGameCode] = useState('');
   const [userNick, setUserNick] = useState('');
+  const [joinDisabled, setJoinDisabled] = useState(false);
 
   return (
     <div className="gradient-animation-1">
@@ -15,6 +16,7 @@ const JoinPage = ({ connectToRoom }) => {
           className={styles.joinForm}
           onSubmit={(e) => {
             e.preventDefault();
+            setJoinDisabled(true);
             if (gameCode === '' || userNick === '') return;
             connectToRoom(gameCode, userNick);
           }}
@@ -45,6 +47,7 @@ const JoinPage = ({ connectToRoom }) => {
           />
           <input
             type="submit"
+            disabled={joinDisabled}
             className={styles.submitJoiningBtn}
             value="DOŁĄCZ!"
           />
