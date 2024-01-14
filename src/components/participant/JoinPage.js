@@ -15,8 +15,8 @@ const JoinPage = ({ connectToRoom }) => {
           className={styles.joinForm}
           onSubmit={(e) => {
             e.preventDefault();
-            // if (gameCode === '' || userNick === '') return;
-            // connectToRoom(gameCode, userNick);
+            if (gameCode === '' || userNick === '') return;
+            connectToRoom(gameCode, userNick);
           }}
         >
           <label htmlFor="game-code-input" className={styles.inpuLabel}>
